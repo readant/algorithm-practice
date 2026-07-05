@@ -1,0 +1,39 @@
+# 编译产物
+*.exe
+*.out
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+
+# 调试文件
+*.pdb
+*.ilk
+*.log
+
+# IDE 配置
+.vscode/
+.vs/
+.idea/
+*.code-workspace
+CppProperties.json
+
+# Competitive Programming Helper 插件缓存
+.cph/
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*~
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 系统文件
+.DS_Store
+Thumbs.db
