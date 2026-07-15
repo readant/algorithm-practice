@@ -7,6 +7,7 @@
 *.lib
 *.so
 *.dylib
+*.class
 
 # 调试文件
 *.pdb
@@ -37,3 +38,6 @@ __pycache__/
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# 笔记文件
+*.txt
