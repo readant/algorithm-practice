@@ -42,5 +42,11 @@ Thumbs.db
 # 本地草稿（不提交，随时可删）
 scratchpad/
 
-# 笔记文件
+# 其他文件
 *.txt
+.mimocode/
+
+# 草稿临时文件
+drafts/*.tmp
+drafts/*.bak
+drafts/*.swp
