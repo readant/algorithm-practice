@@ -3,24 +3,35 @@
 using namespace std;
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    int n;
+    cin >> n;
     
-    int T;
-    cin >> T;
+    char op = 0;
     
-    while (T--) {
+    for (int i = 0; i < n; i++) {
         string s;
         cin >> s;
         
-        int plusPos = s.find('+');
-        int equalPos = s.find('=');
+        int a, b, result;
+        char symbol;
         
-        long long a = stoll(s.substr(0, plusPos));
-        long long b = stoll(s.substr(plusPos + 1, equalPos - plusPos - 1));
-        long long c = stoll(s.substr(equalPos + 1));
+        if (s == "a" || s == "b" || s == "c") {
+            if (s == "a") { op = '+'; symbol = '+'; }
+            else if (s == "b") { op = '-'; symbol = '-'; }
+            else { op = '*'; symbol = '*'; }
+            cin >> a >> b;
+        } else {
+            symbol = op;
+            a = stoi(s);
+            cin >> b;
+        }
         
-        cout << (a + b == c ? "YES" : "NO") << "\n";
+        if (symbol == '+') result = a + b;
+        else if (symbol == '-') result = a - b;
+        else result = a * b;
+        
+        string expr = to_string(a) + symbol + to_string(b) + "=" + to_string(result);
+        cout << expr << "\n" << expr.length() << "\n";
     }
     
     return 0;

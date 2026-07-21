@@ -2,34 +2,36 @@
 #include <string.h>
 
 int main() {
-    int T;
-    scanf("%d", &T);
+    int n;
+    scanf("%d", &n);
     
-    while (T--) {
-        char s[50];
+    char op = 0;
+    
+    for (int i = 0; i < n; i++) {
+        char s[20];
         scanf("%s", s);
         
-        long long a = 0, b = 0, c = 0;
-        int i = 0;
+        int a, b, result;
+        char symbol;
         
-        while (s[i] != '+') {
-            a = a * 10 + (s[i] - '0');
-            i++;
-        }
-        i++;
-        
-        while (s[i] != '=') {
-            b = b * 10 + (s[i] - '0');
-            i++;
-        }
-        i++;
-        
-        while (s[i] != '\0') {
-            c = c * 10 + (s[i] - '0');
-            i++;
+        if (strcmp(s, "a") == 0 || strcmp(s, "b") == 0 || strcmp(s, "c") == 0) {
+            if (s[0] == 'a') { op = '+'; symbol = '+'; }
+            else if (s[0] == 'b') { op = '-'; symbol = '-'; }
+            else { op = '*'; symbol = '*'; }
+            scanf("%d %d", &a, &b);
+        } else {
+            symbol = op;
+            a = atoi(s);
+            scanf("%d", &b);
         }
         
-        printf("%s\n", (a + b == c) ? "YES" : "NO");
+        if (symbol == '+') result = a + b;
+        else if (symbol == '-') result = a - b;
+        else result = a * b;
+        
+        char expr[50];
+        sprintf(expr, "%d%c%d=%d", a, symbol, b, result);
+        printf("%s\n%d\n", expr, (int)strlen(expr));
     }
     
     return 0;

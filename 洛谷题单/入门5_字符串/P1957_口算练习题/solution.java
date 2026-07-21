@@ -3,16 +3,36 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+        int n = sc.nextInt();
         
-        while (T-- > 0) {
+        char op = 0;
+        
+        for (int i = 0; i < n; i++) {
             String s = sc.next();
-            String[] parts = s.split("[+=]");
-            long a = Long.parseLong(parts[0]);
-            long b = Long.parseLong(parts[1]);
-            long c = Long.parseLong(parts[2]);
             
-            System.out.println(a + b == c ? "YES" : "NO");
+            int a, b;
+            char symbol;
+            
+            if (s.equals("a") || s.equals("b") || s.equals("c")) {
+                if (s.equals("a")) { op = '+'; symbol = '+'; }
+                else if (s.equals("b")) { op = '-'; symbol = '-'; }
+                else { op = '*'; symbol = '*'; }
+                a = sc.nextInt();
+                b = sc.nextInt();
+            } else {
+                symbol = op;
+                a = Integer.parseInt(s);
+                b = sc.nextInt();
+            }
+            
+            int result;
+            if (symbol == '+') result = a + b;
+            else if (symbol == '-') result = a - b;
+            else result = a * b;
+            
+            String expr = a + "" + symbol + b + "=" + result;
+            System.out.println(expr);
+            System.out.println(expr.length());
         }
     }
 }
