@@ -1,17 +1,3 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int main(){
-    int M,N;
-    vector<int> a;
-    cin >> M >> N;
-    // 遍历M到N的所有数
-    for(int i = M;i<=N;++i){
-         // 卡住点，如何对每个数，拆开他们的不同位进行个数统计
-    }
-    return 0;
-}
 
 #include <iostream>
 #include <vector>
