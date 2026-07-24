@@ -47,10 +47,5 @@ scratchpad/
 .mimocode/
 .cph
 
-# 草稿临时文件
-drafts/*.tmp
-drafts/*.bak
-drafts/*.swp
-# 所有子文件夹中的drafts文件夹
+# 草稿文件夹（保留本地，不提交）
 **/drafts/
-**/drafs/
