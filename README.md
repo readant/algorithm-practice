@@ -300,4 +300,6 @@ algorithm-practice/
 
 ## License
 
-MIT
+本仓库原创内容采用 [MIT License](LICENSE) 授权。
+
+部分内容（题解思路、知识点讲解）参考了开源社区的分享，已在 [资源与致谢](学习模块/资源与致谢.md) 中标注来源。如有侵权，请联系删除。
