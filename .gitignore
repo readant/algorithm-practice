@@ -34,6 +34,7 @@ CppProperties.json
 __pycache__/
 *.pyc
 *.pyo
+.mypy_cache/
 
 # 系统文件
 .DS_Store
