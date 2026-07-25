@@ -10,6 +10,6 @@ int main() {
     int cnt = 0;
     for (char c : s)   // 更简洁的遍历
         if (c != ' ') cnt++;
-    cout << cnt;
+    cout << cnt << '\n';
     return 0;
 }

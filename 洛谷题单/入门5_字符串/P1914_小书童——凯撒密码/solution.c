@@ -10,6 +10,6 @@ int main() {
         s[i] = (s[i] - 'a' + n) % 26 + 'a';
     }
     
-    printf("%s", s);
+    printf("%s\n", s);
     return 0;
 }

@@ -11,6 +11,6 @@ class Main {
             sb.append((char) ((c - 'a' + n) % 26 + 'a'));
         }
 
-        System.out.print(sb);
+        System.out.println(sb);
     }
 }

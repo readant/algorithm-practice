@@ -18,15 +18,15 @@ int main() {
         }
     }
     
-    int count = 0;
+    int cnt = 0;
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= m; ++j) {
             if (grid[i][j] == 0) {
-                count++;
+                cnt++;
             }
         }
     }
-    
-    cout << count << endl;
+
+    cout << cnt << endl;
     return 0;
 }

@@ -10,21 +10,21 @@ int main() {
         cin >> scores[i][0] >> scores[i][1] >> scores[i][2];
     }
     
-    int count = 0;
+    int cnt = 0;
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
             int sum1 = scores[i][0] + scores[i][1] + scores[i][2];
             int sum2 = scores[j][0] + scores[j][1] + scores[j][2];
-            
-            if (abs(scores[i][0] - scores[j][0]) <= 5 && 
-                abs(scores[i][1] - scores[j][1]) <= 5 && 
-                abs(scores[i][2] - scores[j][2]) <= 5 && 
+
+            if (abs(scores[i][0] - scores[j][0]) <= 5 &&
+                abs(scores[i][1] - scores[j][1]) <= 5 &&
+                abs(scores[i][2] - scores[j][2]) <= 5 &&
                 abs(sum1 - sum2) <= 10) {
-                count++;
+                cnt++;
             }
         }
     }
-    
-    cout << count << endl;
+
+    cout << cnt << endl;
     return 0;
 }

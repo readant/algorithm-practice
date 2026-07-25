@@ -35,6 +35,6 @@ class Main {
             }
             sb.append('\n');
         }
-        System.out.print(sb);
+        System.out.print(sb);  // sb 末尾已有 '\n'
     }
 }
