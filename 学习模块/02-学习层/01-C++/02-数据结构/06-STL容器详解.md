@@ -2,9 +2,70 @@
 
 > 快速查阅 STL 容器 API 请见 [参考层/01-C++/01-STL容器.md](../../../01-参考层/01-C++/01-STL容器.md)
 
-## 概述
+## 为什么需要 STL
 
-STL（Standard Template Library）是C++标准库的核心组件，提供了容器、迭代器、算法和函数对象。掌握STL能大幅提升编程效率。
+### 手动管理数组的痛点
+
+```cpp
+// 不用 STL，你需要手动管理内存
+int arr[100];      // 固定大小，不知道够不够用
+int size = 0;      // 需要自己追踪元素个数
+
+void pushBack(int val) {
+    if (size >= 100) return;  // 满了就加不进去
+    arr[size++] = val;
+}
+
+void insert(int index, int val) {
+    // 要自己写移动元素的逻辑
+    for (int i = size; i > index; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[index] = val;
+    size++;
+}
+```
+
+**问题**：固定大小、手动扩容、代码冗余、容易出错。
+
+### STL 解决了什么
+
+| 问题 | STL 解决方案 |
+|------|-------------|
+| 固定大小 | `vector` 动态扩容 |
+| 手动移动元素 | `insert()` 自动处理 |
+| 查找效率低 | `unordered_map` O(1) 查找 |
+| 排序重复实现 | `sort()` 一行搞定 |
+| 栈/队列手写 | `stack`/`queue` 直接用 |
+
+---
+
+## STL 是什么
+
+STL（Standard Template Library）是 C++ 标准库，提供四大组件：
+
+| 组件 | 作用 | 常用类型 |
+|------|------|----------|
+| **容器** | 存储数据 | vector, map, set, stack, queue |
+| **迭代器** | 遍历容器 | iterator, const_iterator |
+| **算法** | 操作数据 | sort, find, binary_search |
+| **函数对象** | 自定义行为 | greater, less, lambda |
+
+---
+
+## 何时用什么容器
+
+```
+需要动态数组？        → vector
+需要去重？            → set
+需要键值映射？        → map / unordered_map
+需要先进先出？        → queue
+需要后进先出？        → stack
+需要快速查找+排序？   → map（有序）/ unordered_map（更快）
+需要维护最大/最小值？ → priority_queue
+```
+
+---
 
 ## 容器
 
