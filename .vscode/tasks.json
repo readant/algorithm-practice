@@ -1,0 +1,140 @@
+{
+    "tasks": [
+        {
+            "type": "process",
+            "label": "C/C++: g++.exe 生成活动文件",
+            "command": "g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-O0",
+                "-std=c++11",
+                "-Wall",
+                "-Wextra",
+                "-finput-charset=UTF-8",
+                "-fexec-charset=GBK",
+                "${fileBasename}",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "编译器: g++ (C++11) — 直接启动，不经过 Shell"
+        },
+        {
+            "type": "process",
+            "label": "C/C++: gcc.exe 生成活动文件",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-O0",
+                "-std=c11",
+                "-Wall",
+                "-Wextra",
+                "-finput-charset=UTF-8",
+                "-fexec-charset=GBK",
+                "${fileBasename}",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "编译器: gcc (C11) — 直接启动，不经过 Shell"
+        },
+        {
+            "type": "process",
+            "label": "C++ Release (O2)",
+            "command": "g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++11",
+                "-O2",
+                "-DNDEBUG",
+                "-finput-charset=UTF-8",
+                "-fexec-charset=GBK",
+                "${fileBasename}",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "编译器: g++ (C++11) — Release 优化，模拟 OJ 环境"
+        },
+        {
+            "type": "process",
+            "label": "C Release (O2)",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c11",
+                "-O2",
+                "-DNDEBUG",
+                "-finput-charset=UTF-8",
+                "-fexec-charset=GBK",
+                "${fileBasename}",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "编译器: gcc (C11) — Release 优化，模拟 OJ 环境"
+        },
+        {
+            "type": "shell",
+            "label": "Java: javac 编译活动文件",
+            "command": "javac",
+            "args": [
+                "-encoding",
+                "UTF-8",
+                "-d",
+                "${fileDirname}",
+                "${fileBasename}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$javac"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "编译器: javac — 编译当前 .java 文件到同目录"
+        }
+    ],
+    "version": "2.0.0"
+}

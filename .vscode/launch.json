@@ -1,0 +1,44 @@
+{
+    // VS Code 调试配置文件版本（内部标记，不用改）
+    "version": "0.2.0",
+
+    // 配置数组 — 可定义多套方案
+    // 在左侧"运行和调试"面板（Ctrl+Shift+D）的下拉菜单里切换
+    "configurations": [
+        {
+            "name": "C++ (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐格式化",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: g++.exe 生成活动文件"
+        },
+        {
+            "name": "Java: 当前文件",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "Main",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "Java: javac 编译活动文件"
+        }
+    ]
+}

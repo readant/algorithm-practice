@@ -1,0 +1,23 @@
+{
+    // 推荐安装的扩展
+    // 当其他用户打开这个工作区时，VS Code 会提示安装这些扩展
+    "recommendations": [
+        // Competitive Programmer's Helper (CPH) - 竞赛编程助手
+        // 功能：测试用例管理、自动提交、题目下载
+        // 扩展ID: divyanshuagrawal.competitive-programming-helper
+        "divyanshuagrawal.competitive-programming-helper",
+
+        // C/C++ 扩展 - IntelliSense、调试、代码浏览
+        "ms-vscode.cpptools",
+
+        // Git Graph - 可视化 Git 提交历史
+        "mhutchie.git-graph",
+
+        // Material Icon Theme - 文件图标主题
+        "pkief.material-icon-theme"
+    ],
+
+    // 不推荐的扩展
+    // 这些扩展在这个工作区可能不需要或会干扰
+    "unwantedRecommendations": []
+}

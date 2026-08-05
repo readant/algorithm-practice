@@ -1,0 +1,35 @@
+{
+    // =====================================================================
+    // C/C++ 扩展 — IntelliSense 配置
+    //
+    // 专管 IntelliSense：补全、错误波浪线、头文件跳转、类型悬停。
+    // 不影响实际编译！编译取决于 tasks.json / CPH 中的命令参数。
+    // 标准应与编译器一致，否则 IntelliSense 会误报。
+    // =====================================================================
+
+    "version": 4,
+
+    "configurations": [
+        {
+            "name": "Win32",
+
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+
+            // 使用 PATH 中的 g++，IntelliSense 自动检测系统包含路径
+            "compilerPath": "g++",
+
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "windows-gcc-x64",
+
+            // 仅扫描工作区自身，不依赖任何绝对路径
+            "includePath": [
+                "${workspaceFolder}/**"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,85 @@
+{
+    // ####################################################################
+    //  C/C++ 扩展 — 编译与语言标准
+    // ####################################################################
+
+    // g++ 需在系统 PATH 中；若未配置，请设置环境变量 CPP_COMPILER_PATH 并在此引用 ${env:CPP_COMPILER_PATH}
+    "C_Cpp.default.compilerPath": "g++",
+    "C_Cpp.default.cppStandard": "c++11",
+    "C_Cpp.default.cStandard": "c11",
+
+    // ####################################################################
+    //  Java 扩展配置
+    // ####################################################################
+
+    // 依赖环境变量 JAVA_HOME，若未设置请先配置
+    "java.jdt.ls.java.home": "${env:JAVA_HOME}",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-17",
+            "path": "${env:JAVA_HOME}",
+            "default": true
+        }
+    ],
+
+    // ####################################################################
+    //  Python 扩展配置
+    // ####################################################################
+
+    "python.terminal.activateEnvironment": false,
+
+    // ####################################################################
+    //  终端配置
+    // ####################################################################
+
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.profiles.windows": {
+        "Command Prompt": {
+            "path": "C:\\Windows\\System32\\cmd.exe",
+            "args": ["/K"]
+        },
+        // Git Bash 使用 PATH 中的 bash；若未在 PATH，请改为实际安装路径或 ${env:PROGRAMFILES}\\Git\\bin\\bash.exe
+        "Git Bash": {
+            "path": "bash",
+            "args": ["--login"]
+        }
+    },
+
+    // ####################################################################
+    //  文件关联
+    // ####################################################################
+
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.h": "cpp",
+        "*.hpp": "cpp",
+        "*.c": "c",
+        "*.java": "java"
+    },
+
+    // 编码设置
+    "files.encoding": "utf8",
+    "files.eol": "\r\n",
+
+    // ####################################################################
+    //  CPH (Competitive Programmer's Helper) 配置
+    // ####################################################################
+
+    "cph.language.cpp.Args": "-std=c++11 -O2 -Wall -Wextra -finput-charset=UTF-8 -fexec-charset=GBK",
+    "cph.language.cpp.Command": "g++",
+    "cph.language.cpp.OutputArg": "-o",
+    "cph.language.cpp.SubmissionCompiler": "GNU G++23 14.2 (64 bit, msys2)",
+    "cph.general.timeOut": 3000,
+    "cph.general.defaultLanguage": "cpp",
+    "cph.general.autoShowJudge": true,
+    "cph.general.firstTime": false,
+
+    // 洛谷配置
+    "luogu.cphStyle": "ProblemIDwithProblemName",
+    "luogu.defaultProblemSet": "洛谷题库",
+    "luogu.guessProblemID": true,
+    "luogu.showSelectDifficultyHint": false,
+
+    "commentTranslate.hover.enabled": true,
+    "markdown.validate.enabled": true
+}

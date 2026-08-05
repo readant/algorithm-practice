@@ -12,10 +12,8 @@
 # 调试文件
 *.pdb
 *.ilk
-*.log
 
 # IDE 配置
-.vscode/
 .vs/
 .idea/
 *.code-workspace
@@ -44,10 +42,10 @@ Thumbs.db
 scratchpad/
 
 # 其他文件
-*.txt
+*.log
 .mimocode/
 .cph
+_config_backup_*/
 
 # 草稿文件夹（保留本地，不提交）
 **/drafts/
-**/drafs/
