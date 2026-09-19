@@ -8,6 +8,7 @@
 *.so
 *.dylib
 *.class
+*.exe.stackdump
 
 # 调试文件
 *.pdb
@@ -21,6 +22,7 @@ CppProperties.json
 
 # Competitive Programming Helper 插件缓存
 .cph/
+.cph
 
 # 临时文件
 *.tmp
@@ -41,11 +43,12 @@ Thumbs.db
 # 本地草稿（不提交，随时可删）
 scratchpad/
 
+# MiMo / 本地工具
+.mimocode/
+_config_backup_*/
+
 # 其他文件
 *.log
-.mimocode/
-.cph
-_config_backup_*/
 
 # 草稿文件夹（保留本地，不提交）
 **/drafts/
