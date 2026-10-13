@@ -8,7 +8,8 @@
 | 路径 | 放什么 |
 | :-- | :-- |
 | `真实比赛/比赛记录/` | 每场比赛一个 JSON（成绩、逐题得分与用时） |
-| `真实比赛/赛内代码/` · `原始证据/` | 赛场上真正提交的代码；排行榜/题面截图 |
+| `真实比赛/赛内代码/` | **收件箱**：赛后从官网导出 / 复制回来的赛场代码，AI 归位到题解目录后填 `code_file` |
+| `真实比赛/原始证据/` | 排行榜 / 题面截图 |
 | `训练记录/日志/` | 每天一个 JSON，逐题记（含**是否独立做出来**） |
 | `训练记录/原始代码/` · `证据/` | 训练时真正提交的代码；提交记录截图 |
 | `输出/brief.md` | **给 AI 读的摘要**（最省 token，优先读这个） |
@@ -35,7 +36,8 @@ python .ai/build.py --open     # 顺便打开网页
 **比赛** `真实比赛/比赛记录/YYYY-MM-DD_赛事名.json`（可复制 `_模板.json`）
 - `contest`：`id / platform / name / date / rated / contest_system`
 - `scoring`：`total_possible / my_total / rank / participants`（不知道写 `null`）
-- `problems[]`：`letter / title / full_score / pass_rates / my_score / status / post_contest_score / time_spent_minutes`
+- `problems[]`：`letter / title / full_score / pass_rates / my_score / status / code_file / post_contest_score / time_spent_minutes`
+- `code_file`：**本人赛场提交代码的路径**（相对仓库根，即题解目录里的 `我的提交.cpp`）；没留档写 `null`，**不要用 AI 补写一份冒充**
 - `timeline[]`：`stage / minutes / score_gained / kind`（`题` 或 `空转`）
 - `status`：`full` / `partial` / `failed` / `unattempted`
 - `pass_rates`：`primary_source` + `frozen`(封榜) / `official_final`(终版) / `official_insession`(当场)；
@@ -67,6 +69,20 @@ python .ai/build.py --open     # 顺便打开网页
   替代：`.first/.second`、写具体类型的 lambda、`new`、手写 gcd。
 - 全仓体检可跑：`g++ -std=c++11 -fsyntax-only` 逐个编译 .cpp
   （遍历含空格路径要用 `find -print0 | while IFS= read -r -d ''`）。
+
+## 赛后归档：本人代码必收
+
+整理比赛复盘时，**本人赛场提交的那份代码必须留档**，和正解并排放在同一题目录：
+
+- 命名 `我的提交.cpp`（错解可用 `我的提交(错解).cpp`），头注释写清：赛事 / 题号 / 赛内得分 / 错在哪
+- 题目 README 元数据表要有「我的赛内代码」一行；`00-复盘.md` 要链到文件，不能只贴片段
+- `code_file` 填它的路径；**没留档写 `null`**，不要推测、不要代写
+- 日常练习的题不强制
+
+流程：赛后把代码丢进 `真实比赛/赛内代码/`（或 `随手记/素材/`）→ AI 归位到题解目录、改名、补头注释、填 `code_file`。
+**本人代码的最终位置只有一个：题解目录**（复盘要并排看，藏在 `.ai/` 里没用）。
+
+样板：`题解归档/牛客网/牛客周赛 Round 164/C_小红的gcd构造/`（错解与正解并排，复盘据此实测出 47.3% 最优率）。
 
 ## 诚实规则（别绕过）
 
