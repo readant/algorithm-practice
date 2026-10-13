@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-13 20:07:19",
+  "generated_at": "2026-10-13 20:13:20",
   "source": "真实比赛/比赛记录/*.json + 训练记录/日志/*.json",
   "sources": {
     "contests": "真实比赛/比赛记录/*.json",
