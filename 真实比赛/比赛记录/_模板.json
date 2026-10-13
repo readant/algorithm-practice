@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "_说明": "复制本文件为 `YYYY-MM-DD_赛事名.json` 后填写（或用 `python 可视化/growth.py new` 生成）。缺失信息一律写 null，不要省略键；不要填写任何派生字段（期望分、难度档、得分率等由 可视化/growth_core.py 计算）。真值源缺失就写 null，不要猜。",
+  "_说明": "复制本文件为 `YYYY-MM-DD_赛事名.json` 后填写。缺失信息一律写 null，不要省略键；不要填写派生字段（期望分、难度档、得分率等由 可视化/build.py 现算）。字段说明见 可视化/README.md。",
   "contest": {
     "id": "例如 nc-weekly-166",
     "platform": "牛客 | 蓝桥 | 洛谷 | Codeforces | AtCoder | LeetCode | 其他",

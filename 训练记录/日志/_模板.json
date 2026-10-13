@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "_说明": "复制本文件为 `YYYY-MM-DD_平台.json` 后填写。逐题记录；记不清的字段写 null，不要估。派生量（独立AC率等）由 可视化/growth_core.py 计算，不要写进来。",
+  "_说明": "复制本文件为 `YYYY-MM-DD_平台.json` 后填写。逐题记录；记不清的字段写 null，不要估。派生量（独立完成率等）由 可视化/build.py 现算，不要写进来。字段说明见 可视化/README.md。",
   "date": "YYYY-MM-DD",
   "date_range": null,
   "platform": "洛谷",
