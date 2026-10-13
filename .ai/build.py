@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""build.py — 把比赛记录与训练记录汇总成一份摘要（brief.md）和一个网页（dashboard.html）。
+"""build.py — 把比赛记录与训练记录汇总成一份摘要（brief.md）和一个网页（记录.html）。
 
 用法（给 AI 用，人不用跑）：
-    python 可视化/build.py            # 汇总 + 更新两份输出
-    python 可视化/build.py --open     # 顺便打开网页
+    python .ai/build.py            # 汇总 + 更新两份输出
+    python .ai/build.py --open     # 顺便打开网页
 
-只读 真实比赛/比赛记录/ 与 训练记录/日志/，只写 成长数据/ 与 可视化/dashboard.html。
+只读 .ai/真实比赛/比赛记录/ 与 .ai/训练记录/日志/，
+写 .ai/输出/{brief.md,snapshot.json} 与 仓库根的「记录.html」（那个是给人看的，所以放外面）。
 
 诚实约束（别绕过）
 ------------------
 1. 场数 < 3 时**不做**「连续 / 趋势 / 进步」这类表述，只列事实。
-2. 没有「是否独立」标注的题**不计入**独立 AC 率。
+2. 没有「是否独立」标注的题**不计入**独立完成率。
 3. 记不清的字段写 null，不要估。
 """
 
@@ -22,11 +23,12 @@ import webbrowser
 from datetime import datetime
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-CONTESTS = ROOT / "真实比赛" / "比赛记录"
-TRAINING = ROOT / "训练记录" / "日志"
-OUT = ROOT / "成长数据"
-PAGE = ROOT / "可视化" / "记录.html"
+ROOT = Path(__file__).resolve().parent.parent      # 仓库根
+AI = ROOT / ".ai"                                  # 机器层
+CONTESTS = AI / "真实比赛" / "比赛记录"
+TRAINING = AI / "训练记录" / "日志"
+OUT = AI / "输出"
+PAGE = ROOT / "记录.html"                          # 给人看的，放外层
 
 STOP_LOSS = 25             # 单题止损线（分钟）
 REACHABLE = 0.30           # 期望分失分只统计封榜通过率 >= 30% 的题
@@ -161,7 +163,7 @@ def training_facts(days):
 def build_brief(cs, tr):
     L = [f"# 算法练习摘要（{datetime.now():%Y-%m-%d %H:%M} · 比赛 {len(cs)} 场"
          + (f" · 训练 {tr['days']} 天" if tr else "") + "）", ""]
-    L.append("数据来自 `真实比赛/比赛记录/` 与 `训练记录/日志/`；逐题明细见 `成长数据/snapshot.json`。")
+    L.append("数据来自 `.ai/真实比赛/比赛记录/` 与 `.ai/训练记录/日志/`；逐题明细见 `.ai/输出/snapshot.json`。")
     L.append("")
 
     L.append("## 比赛（逐场事实）")
@@ -234,7 +236,7 @@ def build_page(cs, tr):
          "<title>算法练习记录</title>", f"<style>{CSS}</style></head><body><div class=wrap>",
          "<h1>算法练习记录</h1>",
          f'<p class=sub>比赛 {n} 场' + (f" · 训练 {tr['days']} 天" if tr else "")
-         + " · 数据来自 <code>真实比赛/</code> 与 <code>训练记录/</code> · 由 <code>可视化/build.py</code> 生成</p>"]
+         + " · 数据来自 <code>.ai/</code>（机器层）· 由 <code>.ai/build.py</code> 生成</p>"]
 
     if not cs and not tr:
         P.append('<div class=note>还没有任何记录。在根目录 <code>随手记.md</code> 里写一行一题，让 AI 整理。</div>')
@@ -290,8 +292,8 @@ def build_page(cs, tr):
 
     P.append("<h2>数据说明</h2>")
     P.append("<table><tr><th>来源</th><th>内容</th><th>说明</th></tr>"
-             "<tr><td><code>真实比赛/</code></td><td>赛场成绩、赛内代码</td><td>外部可核验</td></tr>"
-             "<tr><td><code>训练记录/</code></td><td>日常训练、是否独立</td><td>自述，分强/中/弱</td></tr>"
+             "<tr><td><code>.ai/真实比赛/</code></td><td>赛场成绩、赛内代码</td><td>外部可核验</td></tr>"
+             "<tr><td><code>.ai/训练记录/</code></td><td>日常训练、是否独立</td><td>自述，分强/中/弱</td></tr>"
              "<tr><td><code>学习模块/</code>、<code>题解归档/</code></td><td>讲义、题解</td>"
              "<td>学习材料，<b>不代表水平</b></td></tr></table>")
     P.append(f"<footer>生成时间 {datetime.now():%Y-%m-%d %H:%M} · 止损线 {STOP_LOSS}′ · "
