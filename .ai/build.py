@@ -189,7 +189,7 @@ def build_brief(cs, tr):
 
     L.append("## 训练")
     if not tr:
-        L.append("- 还没有训练记录。在 `随手记.md` 里一行一题写下，让 AI 整理。")
+        L.append("- 还没有训练记录。在 `随手记/` 里一行一题写下，让 AI 整理。")
     else:
         L.append(f"- 训练 {tr['days']} 天（{tr['first']} ~ {tr['last']}），累计 {tr['total']} 题，AC {tr['ac']}")
         if tr["ind_rate"] is None:
@@ -239,7 +239,7 @@ def build_page(cs, tr):
          + " · 数据来自 <code>.ai/</code>（机器层）· 由 <code>.ai/build.py</code> 生成</p>"]
 
     if not cs and not tr:
-        P.append('<div class=note>还没有任何记录。在根目录 <code>随手记.md</code> 里写一行一题，让 AI 整理。</div>')
+        P.append('<div class=note>还没有任何记录。在根目录 <code>随手记/</code> 里写一行一题，让 AI 整理。</div>')
 
     # 逐场
     if cs:
@@ -272,7 +272,7 @@ def build_page(cs, tr):
     # 训练
     P.append("<h2>训练</h2>")
     if not tr:
-        P.append('<p class=sub>还没有训练记录。<code>随手记.md</code> 里一行一题写下即可。</p>')
+        P.append('<p class=sub>还没有训练记录。<code>随手记/</code> 里一行一题写下即可。</p>')
     else:
         rate = f"{tr['ind_rate'] * 100:.1f}%" if tr["ind_rate"] is not None else "不可计算"
         P.append("<table><tr><th>训练日</th><th>题数</th><th>AC</th><th>有独立标注</th>"
