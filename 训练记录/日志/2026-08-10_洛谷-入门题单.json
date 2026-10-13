@@ -1,0 +1,520 @@
+{
+  "schema_version": "1.0",
+  "_说明": "存量弱证据：由 progress.md 的题单进度记载 + 题解归档目录反推。仅证明『做过』，不证明『独立做出』。independent=null 故不参与独立AC率。",
+  "date": "2026-08-10",
+  "date_range": "2026-07-16~2026-08-10",
+  "platform": "洛谷",
+  "evidence_level": "弱",
+  "source": "progress.md 题单记载 + 题解归档/洛谷 目录",
+  "evidence_files": [],
+  "notes": "progress.md 记载合计约 40 题（入门1 6/15、入门2 1/18、入门3 0/21、入门4 19/20、入门5 11/15、入门6 3/15），但题解归档仅 39 个题目目录，二者存在 1 题出入。故本记录按『目录里确实存在的 39 题』如实登记。全部题解 md 为 AI 生成，不能作为独立完成证据；若日后从洛谷个人主页补导提交记录，可将本记录升级为强/中证据并逐题回填 independent。",
+  "problems": [
+    {
+      "id": "B2002",
+      "title": null,
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "顺序结构"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1000",
+      "title": "超级玛丽游戏",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "顺序结构"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5707",
+      "title": "上学迟到",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "顺序结构"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1047",
+      "title": "校门外的树",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1161",
+      "title": "开灯",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1205",
+      "title": "Transformations",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1319",
+      "title": "压缩技术",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1320",
+      "title": "压缩技术(续集版)",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1427",
+      "title": "小鱼的数字游戏",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1428",
+      "title": "小鱼比可爱",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1554",
+      "title": "梦中的统计",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1614",
+      "title": "爱与愁的心痛",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1789",
+      "title": "插火把",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P2141",
+      "title": "珠心算测验",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P2550",
+      "title": "彩票摇奖",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P2615",
+      "title": "神奇的幻方",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5727",
+      "title": "冰雹猜想",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5728",
+      "title": "旗鼓相当的对手",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5729",
+      "title": "工艺品制作",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5730",
+      "title": "显示屏",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5731",
+      "title": "蛇形方阵",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5732",
+      "title": "杨辉三角",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "数组"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1125",
+      "title": "笨小猴",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1200",
+      "title": "Your_Ride_Is_Here",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1321",
+      "title": "单词覆盖还原",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1597",
+      "title": "语义解析",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1765",
+      "title": "手机",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1914",
+      "title": "小书童——凯撒密码",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1957",
+      "title": "口算练习题",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P308",
+      "title": "统计单词数",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P3741",
+      "title": "小果的键盘",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5015",
+      "title": "标准统计",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5733",
+      "title": "自动修正",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5734",
+      "title": "文件处理软件",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "字符串"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P1304",
+      "title": "哥德巴赫猜想",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "函数与结构体"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5735",
+      "title": "距离函数",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "函数与结构体"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5736",
+      "title": "质数筛",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "函数与结构体"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5737",
+      "title": "闰年展示",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "函数与结构体"
+      ],
+      "code_file": null,
+      "notes": null
+    },
+    {
+      "id": "P5739",
+      "title": "计算阶乘",
+      "verdict": "AC",
+      "attempts": null,
+      "minutes": null,
+      "independent": null,
+      "tags": [
+        "函数与结构体"
+      ],
+      "code_file": null,
+      "notes": null
+    }
+  ]
+}

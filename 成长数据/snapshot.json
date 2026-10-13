@@ -1,0 +1,905 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-13 20:07:19",
+  "source": "真实比赛/比赛记录/*.json + 训练记录/日志/*.json",
+  "sources": {
+    "contests": "真实比赛/比赛记录/*.json",
+    "training": "训练记录/日志/*.json"
+  },
+  "generator": "可视化/growth_core.py",
+  "contests_count": 2,
+  "latest_contest_id": "nc-weekly-165",
+  "config": {
+    "stop_loss_line_minutes": 25,
+    "reachable_rate_floor": 0.3,
+    "tier_bounds": [
+      {
+        "tier": "签到",
+        "min_rate": 0.9
+      },
+      {
+        "tier": "简单",
+        "min_rate": 0.6
+      },
+      {
+        "tier": "中档",
+        "min_rate": 0.3
+      },
+      {
+        "tier": "困难",
+        "min_rate": 0.0
+      }
+    ],
+    "trend_min_contests": 4,
+    "regression_min_contests": 5
+  },
+  "latest": {
+    "id": "nc-weekly-165",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 165",
+    "date": "2026-10-11",
+    "contest_system": "IOI",
+    "is_first_participation": false,
+    "total_possible": 1050,
+    "my_total": 187.5,
+    "rank": 576,
+    "participants": null,
+    "percentile": null,
+    "score_rate": 0.1786,
+    "solved_full_count": 2,
+    "partial_count": 1,
+    "problem_count": 6,
+    "midtier": {
+      "closed": 0,
+      "total": 2
+    },
+    "by_tier": {
+      "签到": {
+        "total": 2,
+        "full": 2,
+        "attempted": 2
+      },
+      "中档": {
+        "total": 2,
+        "full": 0,
+        "attempted": 2
+      },
+      "困难": {
+        "total": 2,
+        "full": 0,
+        "attempted": 0
+      }
+    },
+    "efficiency": {
+      "signin_minutes": 2.52,
+      "total_minutes_used": 66.0,
+      "idle_tail_minutes": 53.95,
+      "score_per_minute": 2.841
+    },
+    "discipline": {
+      "stop_loss_executed": false,
+      "stop_loss_violations": [
+        {
+          "letter": "C",
+          "minutes": 45.53
+        }
+      ],
+      "ordering_followed": true,
+      "expected_ordering": [
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "attempted_nontrivial": [
+        "C",
+        "D"
+      ]
+    },
+    "gaps": {
+      "expected_loss_reachable": 130.9,
+      "missing_highest_expected": {
+        "letter": "D",
+        "expected_score": 78.9
+      }
+    },
+    "tier_border_problems": [
+      "C"
+    ],
+    "problems": [
+      {
+        "letter": "A",
+        "title": "小月的 dx 分",
+        "full_score": 50,
+        "tier": "签到",
+        "tier_border": false,
+        "primary_rate": 0.9956,
+        "expected_score": 49.8,
+        "my_score": 50,
+        "status": "full",
+        "attempted": true,
+        "time_spent_minutes": 2.52,
+        "post_contest_score": null,
+        "tags": [
+          "签到"
+        ],
+        "notes": "2.5 分钟，流程损耗已归零"
+      },
+      {
+        "letter": "B",
+        "title": "小月的配对",
+        "full_score": 100,
+        "tier": "签到",
+        "tier_border": false,
+        "primary_rate": 0.9833,
+        "expected_score": 98.3,
+        "my_score": 100,
+        "status": "full",
+        "attempted": true,
+        "time_spent_minutes": 18.0,
+        "post_contest_score": null,
+        "tags": [
+          "遍历",
+          "计数"
+        ],
+        "notes": "5 行代码写了 18′，目标应 5′"
+      },
+      {
+        "letter": "C",
+        "title": "小月的程序",
+        "full_score": 150,
+        "tier": "中档",
+        "tier_border": true,
+        "primary_rate": 0.5968,
+        "expected_score": 89.5,
+        "my_score": 37.5,
+        "status": "partial",
+        "attempted": true,
+        "time_spent_minutes": 45.53,
+        "post_contest_score": null,
+        "tags": [
+          "前缀和",
+          "单调性"
+        ],
+        "notes": "O(n²) + 数组开小，只过 25%；卡 ~45′ 未止损，连续两场未执行止损线"
+      },
+      {
+        "letter": "D",
+        "title": "小月的删数",
+        "full_score": 200,
+        "tier": "中档",
+        "tier_border": false,
+        "primary_rate": 0.3946,
+        "expected_score": 78.9,
+        "my_score": 0,
+        "status": "failed",
+        "attempted": true,
+        "time_spent_minutes": null,
+        "post_contest_score": 70,
+        "tags": [
+          "前缀交替和",
+          "分组"
+        ],
+        "notes": "赛内未交；赛后补 +70（橙色不计总分）；口径错（整段交替应逐元素交替）"
+      },
+      {
+        "letter": "E",
+        "title": "小月的折返颜色",
+        "full_score": 250,
+        "tier": "困难",
+        "tier_border": false,
+        "primary_rate": 0.1187,
+        "expected_score": 29.7,
+        "my_score": 0,
+        "status": "unattempted",
+        "attempted": false,
+        "time_spent_minutes": null,
+        "post_contest_score": null,
+        "tags": [
+          "树上计数",
+          "并查集"
+        ],
+        "notes": "只读题面，正确弃"
+      },
+      {
+        "letter": "F",
+        "title": "小月的峰",
+        "full_score": 300,
+        "tier": "困难",
+        "tier_border": false,
+        "primary_rate": 0.0508,
+        "expected_score": 15.3,
+        "my_score": 0,
+        "status": "unattempted",
+        "attempted": false,
+        "time_spent_minutes": null,
+        "post_contest_score": null,
+        "tags": [
+          "二分答案"
+        ],
+        "notes": "只读题面，正确弃"
+      }
+    ],
+    "timeline": [
+      {
+        "stage": "A",
+        "start": "00:00:00",
+        "end": "00:02:31",
+        "minutes": 2.52,
+        "score_gained": 50,
+        "kind": "题"
+      },
+      {
+        "stage": "B",
+        "start": "00:02:31",
+        "end": "00:20:31",
+        "minutes": 18.0,
+        "score_gained": 100,
+        "kind": "题"
+      },
+      {
+        "stage": "C",
+        "start": "00:20:31",
+        "end": "01:06:03",
+        "minutes": 45.53,
+        "score_gained": 37.5,
+        "kind": "题"
+      },
+      {
+        "stage": "尾段",
+        "start": "01:06:03",
+        "end": "02:00:00",
+        "minutes": 53.95,
+        "score_gained": 0,
+        "kind": "空转"
+      }
+    ],
+    "timeline_reconstructed": false,
+    "provenance": {
+      "entered_by": "L君+AI",
+      "entered_at": "2026-10-13",
+      "sources": [
+        "赛后复盘 00-复盘.md（赛事排行榜截图 + 赛场题面/代码截图 6 张 + 官方比赛页逐题核对）"
+      ],
+      "confidence": "high"
+    }
+  },
+  "stagnation": [
+    {
+      "label": "完全通过题数",
+      "key": "solved_full_count",
+      "value": 2,
+      "streak": 2,
+      "prev_value": 2,
+      "stalled": true,
+      "verdict": "连续 2 场都是 2 题",
+      "severity": "gray",
+      "value_display": 2
+    },
+    {
+      "label": "单题止损执行",
+      "key": "stop_loss_executed",
+      "value": false,
+      "streak": 2,
+      "prev_value": false,
+      "stalled": true,
+      "verdict": "连续 2 场未执行（止损线 25′）",
+      "severity": "red",
+      "value_display": "否"
+    },
+    {
+      "label": "部分分题数",
+      "key": "partial_count",
+      "value": 1,
+      "streak": 2,
+      "prev_value": 1,
+      "stalled": true,
+      "verdict": "连续 2 场都有 1 道半对题",
+      "severity": "red",
+      "value_display": 1
+    },
+    {
+      "label": "中档题闭环数",
+      "key": "midtier_closed",
+      "value": 0,
+      "streak": 2,
+      "prev_value": 0,
+      "stalled": true,
+      "verdict": "连续 2 场中档题闭环 0 道",
+      "severity": "red",
+      "value_display": 0
+    }
+  ],
+  "progress": [
+    {
+      "label": "得分率",
+      "unit": "pp",
+      "detail": {
+        "from": 13.2,
+        "to": 17.9,
+        "delta": 4.7,
+        "good": true
+      }
+    },
+    {
+      "label": "完全通过题数",
+      "unit": "题",
+      "detail": {
+        "from": 2,
+        "to": 2,
+        "delta": 0,
+        "good": false
+      }
+    },
+    {
+      "label": "中档题闭环数",
+      "unit": "题",
+      "detail": {
+        "from": 0,
+        "to": 0,
+        "delta": 0,
+        "good": false
+      }
+    },
+    {
+      "label": "签到题用时",
+      "unit": "分钟",
+      "detail": {
+        "from": 35.8,
+        "to": 2.52,
+        "delta": -33.3,
+        "good": true
+      }
+    },
+    {
+      "label": "尾段空转",
+      "unit": "分钟",
+      "detail": {
+        "from": 11.9,
+        "to": 53.95,
+        "delta": 42.1,
+        "good": false
+      }
+    },
+    {
+      "label": "期望分失分（可达）",
+      "unit": "分",
+      "detail": {
+        "from": 297.1,
+        "to": 130.9,
+        "delta": -166.2,
+        "good": true
+      }
+    }
+  ],
+  "training": {
+    "days": 1,
+    "date_first": "2026-08-10",
+    "date_last": "2026-08-10",
+    "training_streak_days": 1,
+    "problems_total": 39,
+    "ac_count": 39,
+    "scored_count": 0,
+    "independent_count": 0,
+    "hinted_count": 0,
+    "solution_dependent_count": 0,
+    "independent_ac_rate": null,
+    "dependency_rate": null,
+    "weak_problem_count": 39,
+    "evidence_records": {
+      "强": 0,
+      "中": 0,
+      "弱": 1
+    },
+    "evidence_problems": {
+      "强": 0,
+      "中": 0,
+      "弱": 39
+    },
+    "by_tag": {},
+    "median_minutes_per_problem": null,
+    "problems_per_day": 39.0,
+    "status": "ok",
+    "constraints": [
+      "训练日 1 < 4：禁止画训练趋势线，只能做汇总"
+    ],
+    "note": "尚无任何题带完成度标注 → 独立AC率不可计算。当前训练数据只能证明『做过』。"
+  },
+  "constraints": [
+    "比赛场数 2 < 4：禁止画跨场趋势线，只能用对比表",
+    "比赛场数 2 < 5：禁止回归/预测",
+    "比赛场数 2 < 3：禁止雷达面积对比",
+    "训练日 1 < 4：禁止画训练趋势线，只能做汇总"
+  ],
+  "warnings": [
+    "2026-10-04_牛客周赛-R164.json: timeline 为重建值（原始复盘无绝对起止时刻）",
+    "2026-10-11_牛客周赛-R165.json: 有名次但缺总人数 → 百分位将显示为「数据缺失」"
+  ],
+  "history": [
+    {
+      "id": "nc-weekly-164",
+      "platform": "牛客",
+      "name": "牛客周赛 Round 164",
+      "date": "2026-10-04",
+      "contest_system": "Rated",
+      "is_first_participation": true,
+      "total_possible": 1400,
+      "my_total": 185,
+      "rank": 327,
+      "participants": 994,
+      "percentile": 0.329,
+      "score_rate": 0.1321,
+      "solved_full_count": 2,
+      "partial_count": 1,
+      "problem_count": 7,
+      "midtier": {
+        "closed": 0,
+        "total": 2
+      },
+      "by_tier": {
+        "签到": {
+          "total": 2,
+          "full": 2,
+          "attempted": 2
+        },
+        "简单": {
+          "total": 1,
+          "full": 0,
+          "attempted": 1
+        },
+        "中档": {
+          "total": 2,
+          "full": 0,
+          "attempted": 0
+        },
+        "困难": {
+          "total": 2,
+          "full": 0,
+          "attempted": 0
+        }
+      },
+      "efficiency": {
+        "signin_minutes": 35.8,
+        "total_minutes_used": 108.1,
+        "idle_tail_minutes": 11.9,
+        "score_per_minute": 1.711
+      },
+      "discipline": {
+        "stop_loss_executed": false,
+        "stop_loss_violations": [
+          {
+            "letter": "C",
+            "minutes": 28.3
+          }
+        ],
+        "ordering_followed": false,
+        "expected_ordering": [
+          "E",
+          "D",
+          "C",
+          "G",
+          "F"
+        ],
+        "attempted_nontrivial": [
+          "C"
+        ]
+      },
+      "gaps": {
+        "expected_loss_reachable": 297.1,
+        "missing_highest_expected": {
+          "letter": "E",
+          "expected_score": 120.7
+        }
+      },
+      "tier_border_problems": [
+        "D"
+      ],
+      "problems": [
+        {
+          "letter": "A",
+          "title": "小红的好数",
+          "full_score": 50,
+          "tier": "签到",
+          "tier_border": false,
+          "primary_rate": 0.9964,
+          "expected_score": 49.8,
+          "my_score": 50,
+          "status": "full",
+          "attempted": true,
+          "time_spent_minutes": 35.8,
+          "post_contest_score": null,
+          "tags": [
+            "签到"
+          ],
+          "notes": "首次参赛，流程性损耗极高（35.8′）"
+        },
+        {
+          "letter": "B",
+          "title": "小红下棋",
+          "full_score": 100,
+          "tier": "签到",
+          "tier_border": false,
+          "primary_rate": 0.9167,
+          "expected_score": 91.7,
+          "my_score": 100,
+          "status": "full",
+          "attempted": true,
+          "time_spent_minutes": 44.0,
+          "post_contest_score": null,
+          "tags": [
+            "暴力",
+            "模拟"
+          ],
+          "notes": null
+        },
+        {
+          "letter": "C",
+          "title": "小红的gcd构造",
+          "full_score": 150,
+          "tier": "简单",
+          "tier_border": false,
+          "primary_rate": 0.6307,
+          "expected_score": 94.6,
+          "my_score": 35,
+          "status": "partial",
+          "attempted": true,
+          "time_spent_minutes": 28.3,
+          "post_contest_score": null,
+          "tags": [
+            "数论",
+            "构造"
+          ],
+          "notes": "方法性错误，47.3% 正确率；卡 28.3′ 未止损"
+        },
+        {
+          "letter": "D",
+          "title": "比那名居的桃子",
+          "full_score": 200,
+          "tier": "中档",
+          "tier_border": true,
+          "primary_rate": 0.5841,
+          "expected_score": 116.8,
+          "my_score": 0,
+          "status": "unattempted",
+          "attempted": false,
+          "time_spent_minutes": null,
+          "post_contest_score": null,
+          "tags": [
+            "贪心"
+          ],
+          "notes": "未读题；期望分第 2"
+        },
+        {
+          "letter": "E",
+          "title": "小红的排列构造",
+          "full_score": 250,
+          "tier": "中档",
+          "tier_border": false,
+          "primary_rate": 0.483,
+          "expected_score": 120.7,
+          "my_score": 0,
+          "status": "unattempted",
+          "attempted": false,
+          "time_spent_minutes": null,
+          "post_contest_score": null,
+          "tags": [
+            "构造",
+            "逆向"
+          ],
+          "notes": "未看；期望分第 1（120.8），本场最可惜"
+        },
+        {
+          "letter": "F",
+          "title": "小红删树(easy)",
+          "full_score": 300,
+          "tier": "困难",
+          "tier_border": false,
+          "primary_rate": 0.1299,
+          "expected_score": 39.0,
+          "my_score": 0,
+          "status": "unattempted",
+          "attempted": false,
+          "time_spent_minutes": null,
+          "post_contest_score": null,
+          "tags": [
+            "树形DP"
+          ],
+          "notes": "正确弃（高分值陷阱）"
+        },
+        {
+          "letter": "G",
+          "title": "小红删树(hard)",
+          "full_score": 350,
+          "tier": "困难",
+          "tier_border": false,
+          "primary_rate": 0.1277,
+          "expected_score": 44.7,
+          "my_score": 0,
+          "status": "unattempted",
+          "attempted": false,
+          "time_spent_minutes": null,
+          "post_contest_score": null,
+          "tags": [
+            "树形DP",
+            "换根"
+          ],
+          "notes": "正确弃"
+        }
+      ],
+      "timeline": [
+        {
+          "stage": "A",
+          "start": "00:00:00",
+          "end": "00:35:48",
+          "minutes": 35.8,
+          "score_gained": 50,
+          "kind": "题"
+        },
+        {
+          "stage": "B",
+          "start": "00:35:48",
+          "end": "01:19:48",
+          "minutes": 44.0,
+          "score_gained": 100,
+          "kind": "题"
+        },
+        {
+          "stage": "C",
+          "start": "01:19:48",
+          "end": "01:48:06",
+          "minutes": 28.3,
+          "score_gained": 35,
+          "kind": "题"
+        },
+        {
+          "stage": "尾段",
+          "start": "01:48:06",
+          "end": "02:00:00",
+          "minutes": 11.9,
+          "score_gained": 0,
+          "kind": "空转"
+        }
+      ],
+      "timeline_reconstructed": true,
+      "provenance": {
+        "entered_by": "L君+AI",
+        "entered_at": "2026-10-13",
+        "sources": [
+          "赛后复盘 00-复盘.md（原始数据来自赛事排行榜）"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "nc-weekly-165",
+      "platform": "牛客",
+      "name": "牛客周赛 Round 165",
+      "date": "2026-10-11",
+      "contest_system": "IOI",
+      "is_first_participation": false,
+      "total_possible": 1050,
+      "my_total": 187.5,
+      "rank": 576,
+      "participants": null,
+      "percentile": null,
+      "score_rate": 0.1786,
+      "solved_full_count": 2,
+      "partial_count": 1,
+      "problem_count": 6,
+      "midtier": {
+        "closed": 0,
+        "total": 2
+      },
+      "by_tier": {
+        "签到": {
+          "total": 2,
+          "full": 2,
+          "attempted": 2
+        },
+        "中档": {
+          "total": 2,
+          "full": 0,
+          "attempted": 2
+        },
+        "困难": {
+          "total": 2,
+          "full": 0,
+          "attempted": 0
+        }
+      },
+      "efficiency": {
+        "signin_minutes": 2.52,
+        "total_minutes_used": 66.0,
+        "idle_tail_minutes": 53.95,
+        "score_per_minute": 2.841
+      },
+      "discipline": {
+        "stop_loss_executed": false,
+        "stop_loss_violations": [
+          {
+            "letter": "C",
+            "minutes": 45.53
+          }
+        ],
+        "ordering_followed": true,
+        "expected_ordering": [
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "attempted_nontrivial": [
+          "C",
+          "D"
+        ]
+      },
+      "gaps": {
+        "expected_loss_reachable": 130.9,
+        "missing_highest_expected": {
+          "letter": "D",
+          "expected_score": 78.9
+        }
+      },
+      "tier_border_problems": [
+        "C"
+      ],
+      "problems": [
+        {
+          "letter": "A",
+          "title": "小月的 dx 分",
+          "full_score": 50,
+          "tier": "签到",
+          "tier_border": false,
+          "primary_rate": 0.9956,
+          "expected_score": 49.8,
+          "my_score": 50,
+          "status": "full",
+          "attempted": true,
+          "time_spent_minutes": 2.52,
+          "post_contest_score": null,
+          "tags": [
+            "签到"
+          ],
+          "notes": "2.5 分钟，流程损耗已归零"
+        },
+        {
+          "letter": "B",
+          "title": "小月的配对",
+          "full_score": 100,
+          "tier": "签到",
+          "tier_border": false,
+          "primary_rate": 0.9833,
+          "expected_score": 98.3,
+          "my_score": 100,
+          "status": "full",
+          "attempted": true,
+          "time_spent_minutes": 18.0,
+          "post_contest_score": null,
+          "tags": [
+            "遍历",
+            "计数"
+          ],
+          "notes": "5 行代码写了 18′，目标应 5′"
+        },
+        {
+          "letter": "C",
+          "title": "小月的程序",
+          "full_score": 150,
+          "tier": "中档",
+          "tier_border": true,
+          "primary_rate": 0.5968,
+          "expected_score": 89.5,
+          "my_score": 37.5,
+          "status": "partial",
+          "attempted": true,
+          "time_spent_minutes": 45.53,
+          "post_contest_score": null,
+          "tags": [
+            "前缀和",
+            "单调性"
+          ],
+          "notes": "O(n²) + 数组开小，只过 25%；卡 ~45′ 未止损，连续两场未执行止损线"
+        },
+        {
+          "letter": "D",
+          "title": "小月的删数",
+          "full_score": 200,
+          "tier": "中档",
+          "tier_border": false,
+          "primary_rate": 0.3946,
+          "expected_score": 78.9,
+          "my_score": 0,
+          "status": "failed",
+          "attempted": true,
+          "time_spent_minutes": null,
+          "post_contest_score": 70,
+          "tags": [
+            "前缀交替和",
+            "分组"
+          ],
+          "notes": "赛内未交；赛后补 +70（橙色不计总分）；口径错（整段交替应逐元素交替）"
+        },
+        {
+          "letter": "E",
+          "title": "小月的折返颜色",
+          "full_score": 250,
+          "tier": "困难",
+          "tier_border": false,
+          "primary_rate": 0.1187,
+          "expected_score": 29.7,
+          "my_score": 0,
+          "status": "unattempted",
+          "attempted": false,
+          "time_spent_minutes": null,
+          "post_contest_score": null,
+          "tags": [
+            "树上计数",
+            "并查集"
+          ],
+          "notes": "只读题面，正确弃"
+        },
+        {
+          "letter": "F",
+          "title": "小月的峰",
+          "full_score": 300,
+          "tier": "困难",
+          "tier_border": false,
+          "primary_rate": 0.0508,
+          "expected_score": 15.3,
+          "my_score": 0,
+          "status": "unattempted",
+          "attempted": false,
+          "time_spent_minutes": null,
+          "post_contest_score": null,
+          "tags": [
+            "二分答案"
+          ],
+          "notes": "只读题面，正确弃"
+        }
+      ],
+      "timeline": [
+        {
+          "stage": "A",
+          "start": "00:00:00",
+          "end": "00:02:31",
+          "minutes": 2.52,
+          "score_gained": 50,
+          "kind": "题"
+        },
+        {
+          "stage": "B",
+          "start": "00:02:31",
+          "end": "00:20:31",
+          "minutes": 18.0,
+          "score_gained": 100,
+          "kind": "题"
+        },
+        {
+          "stage": "C",
+          "start": "00:20:31",
+          "end": "01:06:03",
+          "minutes": 45.53,
+          "score_gained": 37.5,
+          "kind": "题"
+        },
+        {
+          "stage": "尾段",
+          "start": "01:06:03",
+          "end": "02:00:00",
+          "minutes": 53.95,
+          "score_gained": 0,
+          "kind": "空转"
+        }
+      ],
+      "timeline_reconstructed": false,
+      "provenance": {
+        "entered_by": "L君+AI",
+        "entered_at": "2026-10-13",
+        "sources": [
+          "赛后复盘 00-复盘.md（赛事排行榜截图 + 赛场题面/代码截图 6 张 + 官方比赛页逐题核对）"
+        ],
+        "confidence": "high"
+      }
+    }
+  ]
+}

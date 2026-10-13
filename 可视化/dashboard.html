@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>算法成长仪表盘 · 真实数据</title>
+<style>
+    :root { --bg:#ffffff;--panel:#f6f7f9;--panel2:#eef1f4;--fg:#1f2328;
+             --muted:#6b7280;--line:#d8dee4;--accent:#2563eb;--red:#dc2626;
+             --green:#16a34a;--gray:#9ca3af;--amber:#d97706; }
+    * { box-sizing:border-box; }
+    body { margin:0;background:var(--bg);color:var(--fg);
+            font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+    .wrap { max-width:920px;margin:0 auto;padding:32px 24px 64px; }
+    header h1 { font-size:22px;margin:0 0 6px; }
+    header .sub { color:var(--muted);margin:0 0 4px; }
+    .verdict { margin-top:10px;padding:10px 14px;background:var(--panel);border-left:3px solid var(--accent);
+                border-radius:4px;font-size:14px; }
+    h2 { font-size:16px;margin:34px 0 6px;padding-bottom:6px;border-bottom:1px solid var(--line); }
+    .sub { color:var(--muted);font-size:12.5px;margin:0 0 14px; }
+    .mut { color:var(--muted); } .bad { color:var(--red); } .good { color:var(--green); }
+    .sub.warn { color:var(--amber); }
+    .mk { display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:50%;
+          font-size:12px;color:#fff;margin-right:6px; }
+    .mk.bad { background:var(--red); } .mk.good { background:var(--green); }
+    .cards { display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:8px; }
+    .card { background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px; }
+    .card .cl { font-size:12px;color:var(--muted);margin-bottom:6px; }
+    .card .cv { font-size:24px;font-weight:600;letter-spacing:-0.5px; }
+    .card .cv .unit { font-size:13px;font-weight:400;color:var(--muted); }
+    .card .cd { font-size:12px;color:var(--muted);margin-top:6px; }
+    .card.stop { border-left:4px solid var(--gray); }
+    .card.stop.red { border-left-color:var(--red);background:#fef2f2; }
+    .card.stop.gray { border-left-color:var(--gray); }
+    .card.stop .cv { font-size:30px; }
+    .card.stop.red .cv { color:var(--red); }
+    table.cmp { width:100%;border-collapse:collapse;font-size:13px;margin-top:4px; }
+    table.cmp th,table.cmp td { padding:8px 10px;border-bottom:1px solid var(--line);text-align:left; }
+    table.cmp th { color:var(--muted);font-weight:500;background:var(--panel); }
+    table.cmp td.num { font-variant-numeric:tabular-nums; }
+    .trow { margin-bottom:12px; }
+    .tlabel { font-size:12.5px;color:var(--muted);margin-bottom:4px; }
+    .tbar { display:flex;height:26px;border-radius:5px;overflow:hidden;border:1px solid var(--line); }
+    .tseg { display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;white-space:nowrap;overflow:hidden; }
+    .tbnote { display:block;font-size:11.5px;color:var(--amber);margin-top:4px; }
+    .chart { overflow-x:auto;padding:6px 0; }
+    details { margin-top:10px; } summary { cursor:pointer;color:var(--accent);font-size:13px; }
+    .orow { padding:12px 0;border-bottom:1px solid var(--line); }
+    .olabel { font-size:12.5px;color:var(--muted);margin-bottom:6px; }
+    .chips { display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px; }
+    .chip { display:inline-block;min-width:22px;text-align:center;padding:2px 8px;border-radius:12px;
+            background:var(--panel2);border:1px solid var(--line);font-size:12px; }
+    .chip.lead { background:transparent;border:none;color:var(--muted);font-size:12px;min-width:auto; }
+    .chip.hit { background:var(--green);color:#fff;border-color:var(--green); }
+    .chip.miss { background:var(--red);color:#fff;border-color:var(--red); }
+    .verdict.ok { color:var(--green); } .verdict.no { color:var(--red); }
+    footer { margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px; }
+    code { background:var(--panel2);padding:1px 5px;border-radius:3px;font-size:12px; }
+    .emptybox { background:var(--panel);border:1px dashed var(--line);border-radius:8px;
+                padding:16px;color:var(--muted);font-size:13px;line-height:1.8; }
+    .warnbox { background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid var(--amber);
+               border-radius:6px;padding:12px 14px;font-size:13px;line-height:1.75;margin-top:12px; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>算法成长仪表盘</h1>
+    <p class="sub">两个真值源：<code>真实比赛/比赛记录/</code>（2 场，2026-10-04 起）+ <code>训练记录/日志/</code>（1 天 / 39 题）· 由 <code>可视化/build.py</code> 生成，勿手改</p>
+    <div class="verdict">得分率 13.2% → 17.9%（↑4.6pp）；<b class="bad">但 完全通过题数、单题止损执行、部分分题数、中档题闭环数 连续多场未变</b>。<p class="sub warn">⚠️ 目前只有 2 场，跨场趋势线（需 ≥ 4 场）暂不绘制——n 小时画趋势线会误导。</p></div>
+  </header>
+
+  <h2><span class="mk bad">!</span>停滞榜 · 先看这里</h2><p class="sub">这些是<b>连续多场没有改变</b>的项。进步项排在它们之后——只看得分率上升，会变成安慰剂。</p><div class="cards"><div class="card stop gray"><div class="cl">完全通过题数</div><div class="cv">2</div><div class="cd">连续 2 场都是 2 题</div></div><div class="card stop red"><div class="cl">单题止损执行</div><div class="cv">否</div><div class="cd">连续 2 场未执行（止损线 25′）</div></div><div class="card stop red"><div class="cl">部分分题数</div><div class="cv">1</div><div class="cd">连续 2 场都有 1 道半对题</div></div><div class="card stop red"><div class="cl">中档题闭环数</div><div class="cv">0</div><div class="cd">连续 2 场中档题闭环 0 道</div></div></div>
+
+  <h2>本场总览（牛客周赛 Round 165）</h2>
+  <div class="cards four">
+      <div class="card kpi"><div class="cl">得分 / 满分</div><div class="cv">187.5 <span class="unit">/ 1050</span></div><div class="cd">17.9% 得分率</div></div>
+      <div class="card kpi"><div class="cl">名次</div><div class="cv">576<span class="unit"> / ?</span></div><div class="cd">百分位 <span class="mut">数据缺失</span></div></div>
+      <div class="card kpi"><div class="cl">完全通过</div><div class="cv">2<span class="unit"> / 6 题</span></div><div class="cd">部分分 1 题</div></div>
+      <div class="card kpi"><div class="cl">期望分失分（可达）</div><div class="cv bad">130.9</div><div class="cd">仅统计封榜通过率 ≥ 30%</div></div>
+    </div>
+
+  <h2>双场对比（2026-10-04 → 2026-10-11）</h2>
+        <p class="sub">只有 2 场，不说「趋势」——趋势线需 ≥ 4 场才有意义。这里只做事实对比。</p>
+        <table class="cmp"><thead><tr><th>指标</th><th>Round 164</th><th>Round 165</th><th>变化</th></tr></thead><tbody>
+        <tr><td>得分率</td><td class="num">13.2%</td><td class="num">17.9%</td><td><span class="good">↑ 0.0pp</span></td></tr><tr><td>完全通过题数</td><td class="num">2</td><td class="num">2</td><td><span class="mut">持平</span></td></tr><tr><td>部分分题数</td><td class="num">1</td><td class="num">1</td><td><span class="mut">持平</span></td></tr><tr><td>中档题闭环</td><td class="num">0/2</td><td class="num">0/2</td><td><span class="mut">持平</span></td></tr><tr><td>签到题用时</td><td class="num">35.8′</td><td class="num">2.5′</td><td><span class="good">↓ 33.3′</span></td></tr><tr><td>尾段空转</td><td class="num">11.9′</td><td class="num">54.0′</td><td><span class="bad">↑ 42.1′</span></td></tr><tr><td>单题止损</td><td class="num">未执行（1 次）</td><td class="num">未执行（1 次）</td><td></td></tr><tr><td>按期望分定序</td><td class="num">否</td><td class="num">是</td><td></td></tr>
+        </tbody></table>
+  <h2>难度档分布</h2><p class="sub">档位按<b>封榜通过率</b>划分（非自评）：签到 ≥90%，简单 60–90%，中档 30–60%，困难 &lt;30%。</p><div class="trow"><div class="tlabel">2026-10-04 · Round 164</div><div class="tbar"><div class="tseg" style="width:28.57%;background:#93c5fd" title="签到：共 2 题，完全通过 2 题"><span>签到 2/2</span></div><div class="tseg" style="width:14.29%;background:#60a5fa" title="简单：共 1 题，完全通过 0 题"><span>简单 0/1</span></div><div class="tseg" style="width:28.57%;background:#2563eb" title="中档：共 2 题，完全通过 0 题"><span>中档 0/2</span></div><div class="tseg" style="width:28.57%;background:#1e3a8a" title="困难：共 2 题，完全通过 0 题"><span>困难 0/2</span></div></div><span class="tbnote">⚠️ D 题通过率距档位边界 ≤2pp，档位判定存疑</span></div><div class="trow"><div class="tlabel">2026-10-11 · Round 165</div><div class="tbar"><div class="tseg" style="width:33.33%;background:#93c5fd" title="签到：共 2 题，完全通过 2 题"><span>签到 2/2</span></div><div class="tseg" style="width:33.33%;background:#2563eb" title="中档：共 2 题，完全通过 0 题"><span>中档 0/2</span></div><div class="tseg" style="width:33.33%;background:#1e3a8a" title="困难：共 2 题，完全通过 0 题"><span>困难 0/2</span></div></div><span class="tbnote">⚠️ C 题通过率距档位边界 ≤2pp，档位判定存疑</span></div>
+  <h2>期望分 vs 实得（牛客周赛 Round 165）</h2><p class="sub">期望分 = 封榜通过率 × 满分。浅条高、深条矮 = 「该拿没拿」。最可惜（期望分最高的零分题）：<b class="bad">D 题（期望 78.9）</b>。</p><div class="chart"><svg viewBox="0 0 648 262" width="100%" style="max-width:648px" role="img"><line x1="152" y1="6" x2="152" y2="252" stroke="#d8dee4" stroke-width="1"/><text x="0" y="28" font-size="12" fill="#1f2328">A · 小月的 dx 分</text><rect x="152" y="13" width="66.4" height="9" rx="2" fill="#2563eb" opacity="0.32"/><rect x="152" y="26" width="66.7" height="9" rx="2" fill="#2563eb"/><text x="560" y="22" font-size="11" fill="#6b7280">期望 49.8</text><text x="560" y="35" font-size="11" fill="#2563eb">实得 50</text><text x="0" y="68" font-size="12" fill="#1f2328">B · 小月的配对</text><rect x="152" y="53" width="131.1" height="9" rx="2" fill="#2563eb" opacity="0.32"/><rect x="152" y="66" width="133.3" height="9" rx="2" fill="#2563eb"/><text x="560" y="62" font-size="11" fill="#6b7280">期望 98.3</text><text x="560" y="75" font-size="11" fill="#2563eb">实得 100</text><text x="0" y="108" font-size="12" fill="#1f2328">C · 小月的程序 ⚠︎</text><rect x="152" y="93" width="119.3" height="9" rx="2" fill="#2563eb" opacity="0.32"/><rect x="152" y="106" width="50.0" height="9" rx="2" fill="#2563eb"/><text x="560" y="102" font-size="11" fill="#6b7280">期望 89.5</text><text x="560" y="115" font-size="11" fill="#2563eb">实得 37.5</text><text x="0" y="148" font-size="12" fill="#1f2328">D · 小月的删数</text><rect x="152" y="133" width="105.2" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="154" font-size="10" fill="#dc2626">零分</text><text x="560" y="142" font-size="11" fill="#6b7280">期望 78.9</text><text x="560" y="155" font-size="11" fill="#2563eb">实得 0</text><text x="0" y="188" font-size="12" fill="#1f2328">E · 小月的折返颜色</text><rect x="152" y="173" width="39.6" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="194" font-size="10" fill="#dc2626">零分</text><text x="560" y="182" font-size="11" fill="#6b7280">期望 29.7</text><text x="560" y="195" font-size="11" fill="#2563eb">实得 0</text><text x="0" y="228" font-size="12" fill="#1f2328">F · 小月的峰</text><rect x="152" y="213" width="20.4" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="234" font-size="10" fill="#dc2626">零分</text><text x="560" y="222" font-size="11" fill="#6b7280">期望 15.3</text><text x="560" y="235" font-size="11" fill="#2563eb">实得 0</text></svg></div><details><summary>展开上一场（牛客周赛 Round 164）</summary><div class="chart"><svg viewBox="0 0 648 302" width="100%" style="max-width:648px" role="img"><line x1="152" y1="6" x2="152" y2="292" stroke="#d8dee4" stroke-width="1"/><text x="0" y="28" font-size="12" fill="#1f2328">A · 小红的好数</text><rect x="152" y="13" width="56.9" height="9" rx="2" fill="#2563eb" opacity="0.32"/><rect x="152" y="26" width="57.1" height="9" rx="2" fill="#2563eb"/><text x="560" y="22" font-size="11" fill="#6b7280">期望 49.8</text><text x="560" y="35" font-size="11" fill="#2563eb">实得 50</text><text x="0" y="68" font-size="12" fill="#1f2328">B · 小红下棋</text><rect x="152" y="53" width="104.8" height="9" rx="2" fill="#2563eb" opacity="0.32"/><rect x="152" y="66" width="114.3" height="9" rx="2" fill="#2563eb"/><text x="560" y="62" font-size="11" fill="#6b7280">期望 91.7</text><text x="560" y="75" font-size="11" fill="#2563eb">实得 100</text><text x="0" y="108" font-size="12" fill="#1f2328">C · 小红的gcd构造</text><rect x="152" y="93" width="108.1" height="9" rx="2" fill="#2563eb" opacity="0.32"/><rect x="152" y="106" width="40.0" height="9" rx="2" fill="#2563eb"/><text x="560" y="102" font-size="11" fill="#6b7280">期望 94.6</text><text x="560" y="115" font-size="11" fill="#2563eb">实得 35</text><text x="0" y="148" font-size="12" fill="#1f2328">D · 比那名居的桃子 ⚠︎</text><rect x="152" y="133" width="133.5" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="154" font-size="10" fill="#dc2626">零分</text><text x="560" y="142" font-size="11" fill="#6b7280">期望 116.8</text><text x="560" y="155" font-size="11" fill="#2563eb">实得 0</text><text x="0" y="188" font-size="12" fill="#1f2328">E · 小红的排列构造</text><rect x="152" y="173" width="137.9" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="194" font-size="10" fill="#dc2626">零分</text><text x="560" y="182" font-size="11" fill="#6b7280">期望 120.7</text><text x="560" y="195" font-size="11" fill="#2563eb">实得 0</text><text x="0" y="228" font-size="12" fill="#1f2328">F · 小红删树(easy…</text><rect x="152" y="213" width="44.6" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="234" font-size="10" fill="#dc2626">零分</text><text x="560" y="222" font-size="11" fill="#6b7280">期望 39.0</text><text x="560" y="235" font-size="11" fill="#2563eb">实得 0</text><text x="0" y="268" font-size="12" fill="#1f2328">G · 小红删树(hard…</text><rect x="152" y="253" width="51.1" height="9" rx="2" fill="#2563eb" opacity="0.32"/><text x="155" y="274" font-size="10" fill="#dc2626">零分</text><text x="560" y="262" font-size="11" fill="#6b7280">期望 44.7</text><text x="560" y="275" font-size="11" fill="#2563eb">实得 0</text></svg></div></details>
+  <h2>时间线甘特（每场一行）</h2><p class="sub">看时间去哪了。灰色斜纹段 = 零提交空转。</p><div class="chart"><svg viewBox="0 0 710 122" width="100%" style="max-width:710px" role="img"><line x1="130.0" y1="16" x2="130.0" y2="114" stroke="#d8dee4" stroke-width="1"/><text x="130.0" y="11" font-size="10" fill="#6b7280" text-anchor="middle">0′</text><line x1="270.0" y1="16" x2="270.0" y2="114" stroke="#d8dee4" stroke-width="1"/><text x="270.0" y="11" font-size="10" fill="#6b7280" text-anchor="middle">30′</text><line x1="410.0" y1="16" x2="410.0" y2="114" stroke="#d8dee4" stroke-width="1"/><text x="410.0" y="11" font-size="10" fill="#6b7280" text-anchor="middle">60′</text><line x1="550.0" y1="16" x2="550.0" y2="114" stroke="#d8dee4" stroke-width="1"/><text x="550.0" y="11" font-size="10" fill="#6b7280" text-anchor="middle">90′</text><line x1="690.0" y1="16" x2="690.0" y2="114" stroke="#d8dee4" stroke-width="1"/><text x="690.0" y="11" font-size="10" fill="#6b7280" text-anchor="middle">120′</text><text x="0" y="44" font-size="12" fill="#1f2328">Round 164</text><rect x="130.0" y="24" width="167.1" height="26" rx="3" fill="#2563eb" opacity="1"/><text x="213.5" y="41" font-size="11" fill="#ffffff" text-anchor="middle">A 50</text><rect x="297.1" y="24" width="205.3" height="26" rx="3" fill="#2563eb" opacity="1"/><text x="399.7" y="41" font-size="11" fill="#ffffff" text-anchor="middle">B 100</text><rect x="502.4" y="24" width="132.1" height="26" rx="3" fill="#2563eb" opacity="1"/><text x="568.4" y="41" font-size="11" fill="#ffffff" text-anchor="middle">C 35</text><rect x="634.5" y="24" width="55.5" height="26" rx="3" fill="#9ca3af" opacity="0.35"/><text x="662.2" y="41" font-size="11" fill="#1f2328" text-anchor="middle">尾段 0</text><text x="0" y="88" font-size="12" fill="#1f2328">Round 165</text><rect x="130.0" y="68" width="11.8" height="26" rx="3" fill="#2563eb" opacity="1"/><rect x="141.8" y="68" width="84.0" height="26" rx="3" fill="#2563eb" opacity="1"/><text x="183.8" y="85" font-size="11" fill="#ffffff" text-anchor="middle">B 100</text><rect x="225.8" y="68" width="212.5" height="26" rx="3" fill="#2563eb" opacity="1"/><text x="332.0" y="85" font-size="11" fill="#ffffff" text-anchor="middle">C 37.5</text><rect x="438.2" y="68" width="251.8" height="26" rx="3" fill="#9ca3af" opacity="0.35"/><text x="564.1" y="85" font-size="11" fill="#1f2328" text-anchor="middle">尾段 0</text></svg></div>
+  <h2>纪律与效率（逐场）</h2>
+    <table class="cmp"><thead><tr><th>日期</th><th>单题止损（25′线）</th><th>尾段空转</th><th>有效用时</th><th>得分速度</th><th>期望分失分</th></tr></thead>
+    <tbody><tr><td>2026-10-04</td><td>❌ 未执行</td><td>11.9′</td><td>108.1′</td><td>1.71 分/分</td><td class="num">297.1</td></tr><tr><td>2026-10-11</td><td>❌ 未执行</td><td>54.0′</td><td>66.0′</td><td>2.84 分/分</td><td class="num">130.9</td></tr></tbody></table>
+  <h2>定序对照</h2><p class="sub">规则：非签到档中，按期望分降序，实际尝试的题应为该序列的<b>前缀</b>。</p><div class="orow"><div class="olabel">2026-10-04</div><div class="chips"><span class="chip lead">期望序（非签到）</span><span class="chip">E</span><span class="chip">D</span><span class="chip">C</span><span class="chip">G</span><span class="chip">F</span></div><div class="chips"><span class="chip lead">实际尝试</span><span class="chip miss">E</span><span class="chip miss">D</span><span class="chip hit">C</span><span class="chip miss">G</span><span class="chip miss">F</span></div><div class="verdict no">未按期望分执行 ❌</div></div><div class="orow"><div class="olabel">2026-10-11</div><div class="chips"><span class="chip lead">期望序（非签到）</span><span class="chip">C</span><span class="chip">D</span><span class="chip">E</span><span class="chip">F</span></div><div class="chips"><span class="chip lead">实际尝试</span><span class="chip hit">C</span><span class="chip hit">D</span><span class="chip miss">E</span><span class="chip miss">F</span></div><div class="verdict ok">按期望分执行 ✅</div></div>
+
+  <h2>训练近况（日常训练真值）</h2><p class="sub">来源 <code>训练记录/日志/</code>（由 <code>随手记.md</code> 整理而来）。<b>独立 AC 率只统计有完成度标注的题</b>——弱证据（只有题号记载、无代码无截图）不参与，否则刷题量会伪装成能力。</p><div class="cards four">
+      <div class="card kpi"><div class="cl">训练日</div><div class="cv">1<span class="unit"> 天</span></div><div class="cd">2026-08-10 ~ 2026-08-10</div></div>
+      <div class="card kpi"><div class="cl">累计题数（AC）</div><div class="cv">39<span class="unit"> / 39</span></div><div class="cd">日均 39.0 题</div></div>
+      <div class="card kpi"><div class="cl">独立 AC 率</div><div class="cv" class="mut">不可计算</div><div class="cd">基于 0 道有完成度标注的题</div></div>
+      <div class="card kpi"><div class="cl">依赖题解率</div><div class="cv">不可计算</div><div class="cd">看题解/卡住后才过的占比</div></div>
+    </div><div class="tlabel">独立完成度构成（39 题）</div><div class="tbar"><div class="tseg" style="width:100.00%;background:#9ca3af" title="未标注：39 题"><span>未标注 39</span></div></div><div class="tlabel">证据分级（39 题）</div><div class="tbar"><div class="tseg" style="width:100.00%;background:#9ca3af" title="弱证据：39 题"><span>弱 39</span></div></div><div class="warnbox">⚠️ <b>独立 AC 率不可计算</b>：39 道题全部为弱证据，没有完成度标注、没有原始代码。这批数据只能证明「做过」，<b>不能</b>支撑「独立做出」的结论。要让它变成真证据：① 写随手记时补上「独立 / 看题解」② 把原始代码丢进 <code>训练记录/原始代码/</code>。</div>
+
+  <h2>数据溯源</h2>
+    <p class="sub">本页所有数字只来自 <code>真实比赛/比赛记录/*.json</code> 与 <code>训练记录/日志/*.json</code>。AI 生成的题解/讲义不参与任何计算。</p>
+    <table class="cmp"><thead><tr><th>日期</th><th>赛事</th><th>来源</th><th>置信度</th></tr></thead><tbody><tr><td>2026-10-04</td><td>牛客周赛 Round 164</td><td>赛后复盘 00-复盘.md（原始数据来自赛事排行榜）（时间线为重建值）</td><td>高</td></tr><tr><td>2026-10-11</td><td>牛客周赛 Round 165</td><td>赛后复盘 00-复盘.md（赛事排行榜截图 + 赛场题面/代码截图 6 张 + 官方比赛页逐题核对）</td><td>高</td></tr></tbody></table>
+
+  <footer>
+    生成时间 2026-10-13 20:07 · 止损线 25′ · 期望分失分门槛 通过率 ≥ 30%<br>
+    真值源：<code>真实比赛/比赛记录/</code> + <code>训练记录/日志/</code> · 你只需写 <code>随手记.md</code>，其余交给 AI
+  </footer>
+</div>
+</body>
+</html>

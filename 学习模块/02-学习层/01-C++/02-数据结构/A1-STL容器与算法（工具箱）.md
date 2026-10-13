@@ -17,7 +17,9 @@
 | 仿函数 Functors | 可调用对象 | 会 `greater<int>` 小顶堆；会 lambda 简例 |
 
 ```cpp
-#include <bits/stdc++.h>   // 比赛常用；正式笔记应知道真实头文件
+#include <algorithm>   // sort
+#include <queue>       // priority_queue
+#include <vector>      // vector（含迭代器）
 using namespace std;
 
 sort(a.begin(), a.end());                         // 算法
@@ -369,7 +371,7 @@ sort(v.begin(), v.end(), [](auto &x, auto &y) {
 
 ## 10. 算法头最小集
 
-`#include <bits/stdc++.h>` 可全开；下面写真实来源便于理解。
+本仓约定**禁止万能头**；下表给出各算法的真实头文件来源，写代码/笔记时按此列全。
 
 | 算法 | 头文件 | 备赛用途 |
 | :--- | :--- | :--- |

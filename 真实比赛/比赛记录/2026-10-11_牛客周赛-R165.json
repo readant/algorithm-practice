@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "contest": {
+    "id": "nc-weekly-165",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 165",
+    "date": "2026-10-11",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "IOI",
+    "contest_url": "https://ac.nowcoder.com/acm/contest/141721",
+    "is_first_participation": false
+  },
+  "scoring": {
+    "total_possible": 1050,
+    "my_total": 187.5,
+    "rank": 576,
+    "participants": null,
+    "last_submission_time": "01:06:03"
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": "小月的 dx 分",
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 907, "denominator": 911, "rate": 0.996 },
+        "official_final": { "numerator": 1107, "denominator": 1112, "rate": 0.996 },
+        "official_insession": null
+      },
+      "my_score": 50,
+      "status": "full",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 2.52,
+      "time_start": "00:00:00",
+      "time_end": "00:02:31",
+      "tags": ["签到"],
+      "notes": "2.5 分钟，流程损耗已归零"
+    },
+    {
+      "letter": "B",
+      "title": "小月的配对",
+      "full_score": 100,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 824, "denominator": 838, "rate": 0.983 },
+        "official_final": { "numerator": 1004, "denominator": 1022, "rate": 0.982 },
+        "official_insession": null
+      },
+      "my_score": 100,
+      "status": "full",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 18.0,
+      "time_start": "00:02:31",
+      "time_end": "00:20:31",
+      "tags": ["遍历", "计数"],
+      "notes": "5 行代码写了 18′，目标应 5′"
+    },
+    {
+      "letter": "C",
+      "title": "小月的程序",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 404, "denominator": 677, "rate": 0.597 },
+        "official_final": { "numerator": 521, "denominator": 825, "rate": 0.632 },
+        "official_insession": null
+      },
+      "my_score": 37.5,
+      "status": "partial",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 45.53,
+      "time_start": "00:20:31",
+      "time_end": "01:06:03",
+      "tags": ["前缀和", "单调性"],
+      "notes": "O(n²) + 数组开小，只过 25%；卡 ~45′ 未止损，连续两场未执行止损线"
+    },
+    {
+      "letter": "D",
+      "title": "小月的删数",
+      "full_score": 200,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 161, "denominator": 408, "rate": 0.395 },
+        "official_final": { "numerator": 242, "denominator": 507, "rate": 0.477 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "failed",
+      "submitted_in_contest": false,
+      "read_only": false,
+      "post_contest_score": 70,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["前缀交替和", "分组"],
+      "notes": "赛内未交；赛后补 +70（橙色不计总分）；口径错（整段交替应逐元素交替）"
+    },
+    {
+      "letter": "E",
+      "title": "小月的折返颜色",
+      "full_score": 250,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 26, "denominator": 219, "rate": 0.119 },
+        "official_final": { "numerator": 82, "denominator": 290, "rate": 0.283 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "submitted_in_contest": false,
+      "read_only": true,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["树上计数", "并查集"],
+      "notes": "只读题面，正确弃"
+    },
+    {
+      "letter": "F",
+      "title": "小月的峰",
+      "full_score": 300,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 9, "denominator": 177, "rate": 0.051 },
+        "official_final": { "numerator": 34, "denominator": 221, "rate": 0.154 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "submitted_in_contest": false,
+      "read_only": true,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["二分答案"],
+      "notes": "只读题面，正确弃"
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": "00:02:31", "minutes": 2.52, "score_gained": 50, "kind": "题" },
+    { "stage": "B", "start": "00:02:31", "end": "00:20:31", "minutes": 18.0, "score_gained": 100, "kind": "题" },
+    { "stage": "C", "start": "00:20:31", "end": "01:06:03", "minutes": 45.53, "score_gained": 37.5, "kind": "题" },
+    { "stage": "尾段", "start": "01:06:03", "end": "02:00:00", "minutes": 53.95, "score_gained": 0, "kind": "空转" }
+  ],
+  "timeline_reconstructed": false,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "2026-10-13",
+    "sources": ["赛后复盘 00-复盘.md（赛事排行榜截图 + 赛场题面/代码截图 6 张 + 官方比赛页逐题核对）"],
+    "confidence": "high"
+  }
+}

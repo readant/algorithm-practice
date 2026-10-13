@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "_说明": "复制本文件为 `YYYY-MM-DD_赛事名.json` 后填写（或用 `python 可视化/growth.py new` 生成）。缺失信息一律写 null，不要省略键；不要填写任何派生字段（期望分、难度档、得分率等由 可视化/growth_core.py 计算）。真值源缺失就写 null，不要猜。",
+  "contest": {
+    "id": "例如 nc-weekly-166",
+    "platform": "牛客 | 蓝桥 | 洛谷 | Codeforces | AtCoder | LeetCode | 其他",
+    "name": "例如 牛客周赛 Round 166",
+    "date": "YYYY-MM-DD",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "Rated | IOI | ACM | OI | 未标注",
+    "contest_url": null,
+    "is_first_participation": false
+  },
+  "scoring": {
+    "total_possible": null,
+    "my_total": null,
+    "rank": null,
+    "participants": null,
+    "last_submission_time": null
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": null,
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "封榜 | 官方终版 | 官方当场",
+        "frozen": { "numerator": null, "denominator": null, "rate": null },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": null,
+      "status": "full | partial | failed | unattempted",
+      "submitted_in_contest": null,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": [],
+      "notes": null
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": null, "minutes": null, "score_gained": null, "kind": "题 | 空转" }
+  ],
+  "timeline_reconstructed": false,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "YYYY-MM-DD",
+    "sources": [],
+    "confidence": "high | medium | low"
+  }
+}

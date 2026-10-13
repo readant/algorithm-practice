@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "_说明": "复制本文件为 `YYYY-MM-DD_平台.json` 后填写。逐题记录；记不清的字段写 null，不要估。派生量（独立AC率等）由 可视化/growth_core.py 计算，不要写进来。",
+  "date": "YYYY-MM-DD",
+  "date_range": null,
+  "platform": "洛谷",
+  "evidence_level": "中",
+  "source": "自述",
+  "evidence_files": [],
+  "notes": null,
+  "problems": [
+    {
+      "id": "P1000",
+      "title": "超级玛丽游戏",
+      "verdict": "AC",
+      "attempts": 1,
+      "minutes": 12,
+      "independent": "独立",
+      "tags": ["模拟"],
+      "code_file": null,
+      "notes": null
+    }
+  ]
+}

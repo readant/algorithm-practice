@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "contest": {
+    "id": "nc-weekly-164",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 164",
+    "date": "2026-10-04",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "Rated",
+    "contest_url": "https://ac.nowcoder.com/acm/contest/141142",
+    "is_first_participation": true
+  },
+  "scoring": {
+    "total_possible": 1400,
+    "my_total": 185,
+    "rank": 327,
+    "participants": 994,
+    "last_submission_time": "01:48:06"
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": "小红的好数",
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 555, "denominator": 557, "rate": 0.996 }
+      },
+      "my_score": 50,
+      "status": "full",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 35.8,
+      "time_start": "00:00:00",
+      "time_end": "00:35:48",
+      "tags": ["签到"],
+      "notes": "首次参赛，流程性损耗极高（35.8′）"
+    },
+    {
+      "letter": "B",
+      "title": "小红下棋",
+      "full_score": 100,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 396, "denominator": 432, "rate": 0.917 }
+      },
+      "my_score": 100,
+      "status": "full",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 44.0,
+      "time_start": "00:35:48",
+      "time_end": "01:19:48",
+      "tags": ["暴力", "模拟"],
+      "notes": null
+    },
+    {
+      "letter": "C",
+      "title": "小红的gcd构造",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 222, "denominator": 352, "rate": 0.631 }
+      },
+      "my_score": 35,
+      "status": "partial",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 28.3,
+      "time_start": "01:19:48",
+      "time_end": "01:48:06",
+      "tags": ["数论", "构造"],
+      "notes": "方法性错误，47.3% 正确率；卡 28.3′ 未止损"
+    },
+    {
+      "letter": "D",
+      "title": "比那名居的桃子",
+      "full_score": 200,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 125, "denominator": 214, "rate": 0.584 }
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "submitted_in_contest": false,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["贪心"],
+      "notes": "未读题；期望分第 2"
+    },
+    {
+      "letter": "E",
+      "title": "小红的排列构造",
+      "full_score": 250,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 71, "denominator": 147, "rate": 0.483 }
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "submitted_in_contest": false,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["构造", "逆向"],
+      "notes": "未看；期望分第 1（120.8），本场最可惜"
+    },
+    {
+      "letter": "F",
+      "title": "小红删树(easy)",
+      "full_score": 300,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 10, "denominator": 77, "rate": 0.130 }
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "submitted_in_contest": false,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["树形DP"],
+      "notes": "正确弃（高分值陷阱）"
+    },
+    {
+      "letter": "G",
+      "title": "小红删树(hard)",
+      "full_score": 350,
+      "pass_rates": {
+        "primary_source": "官方当场",
+        "frozen": null,
+        "official_final": null,
+        "official_insession": { "numerator": 6, "denominator": 47, "rate": 0.128 }
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "submitted_in_contest": false,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["树形DP", "换根"],
+      "notes": "正确弃"
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": "00:35:48", "minutes": 35.8, "score_gained": 50, "kind": "题" },
+    { "stage": "B", "start": "00:35:48", "end": "01:19:48", "minutes": 44.0, "score_gained": 100, "kind": "题" },
+    { "stage": "C", "start": "01:19:48", "end": "01:48:06", "minutes": 28.3, "score_gained": 35, "kind": "题" },
+    { "stage": "尾段", "start": "01:48:06", "end": "02:00:00", "minutes": 11.9, "score_gained": 0, "kind": "空转" }
+  ],
+  "timeline_reconstructed": true,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "2026-10-13",
+    "sources": ["赛后复盘 00-复盘.md（原始数据来自赛事排行榜）"],
+    "confidence": "high"
+  }
+}

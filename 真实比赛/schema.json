@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://algorithm-practice/真实比赛/schema.json",
+  "title": "真实比赛记录 v1.0",
+  "description": "唯一真值源。本文件只存原始事实，不存派生量（期望分/难度档/得分率/停滞 streak 等由 可视化/build_dashboard.py 构建时计算）。",
+  "type": "object",
+  "required": ["schema_version", "contest", "scoring", "problems", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "_说明": { "type": "string" },
+
+    "contest": {
+      "type": "object",
+      "required": ["id", "platform", "name", "date", "rated", "contest_system"],
+      "properties": {
+        "id": { "type": "string" },
+        "platform": { "enum": ["牛客", "蓝桥", "洛谷", "Codeforces", "AtCoder", "LeetCode", "其他"] },
+        "name": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "start_time": { "type": ["string", "null"] },
+        "duration_minutes": { "type": ["integer", "null"] },
+        "rated": { "type": ["boolean", "null"] },
+        "contest_system": { "enum": ["Rated", "IOI", "ACM", "OI", "未标注"] },
+        "contest_url": { "type": ["string", "null"] },
+        "is_first_participation": { "type": ["boolean", "null"] }
+      }
+    },
+
+    "scoring": {
+      "type": "object",
+      "required": ["total_possible", "my_total"],
+      "properties": {
+        "total_possible": { "type": ["number", "null"], "description": "赛事满分之和" },
+        "my_total": { "type": ["number", "null"], "description": "只含赛内提交，不含 post_contest_score" },
+        "rank": { "type": ["integer", "null"] },
+        "participants": { "type": ["integer", "null"], "description": "榜面总人数，未知填 null" },
+        "last_submission_time": { "type": ["string", "null"] }
+      }
+    },
+
+    "problems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["letter", "full_score", "pass_rates", "my_score", "status"],
+        "properties": {
+          "letter": { "type": "string" },
+          "title": { "type": ["string", "null"] },
+          "full_score": { "type": "number" },
+          "pass_rates": {
+            "type": "object",
+            "required": ["primary_source"],
+            "properties": {
+              "primary_source": { "enum": ["封榜", "官方终版", "官方当场"] },
+              "frozen": { "$ref": "#/definitions/rate_or_null" },
+              "official_final": { "$ref": "#/definitions/rate_or_null" },
+              "official_insession": { "$ref": "#/definitions/rate_or_null" }
+            }
+          },
+          "my_score": { "type": "number" },
+          "status": { "enum": ["full", "partial", "failed", "unattempted"] },
+          "submitted_in_contest": { "type": ["boolean", "null"] },
+          "read_only": { "type": ["boolean", "null"] },
+          "post_contest_score": { "type": ["number", "null"], "description": "赛后补题分，永不并入 my_total" },
+          "post_contest_counts": { "type": ["boolean", "null"] },
+          "time_spent_minutes": { "type": ["number", "null"] },
+          "time_start": { "type": ["string", "null"] },
+          "time_end": { "type": ["string", "null"] },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stage", "minutes", "kind"],
+        "properties": {
+          "stage": { "type": "string" },
+          "start": { "type": ["string", "null"] },
+          "end": { "type": ["string", "null"] },
+          "minutes": { "type": "number" },
+          "score_gained": { "type": ["number", "null"] },
+          "kind": { "enum": ["题", "空转", "等待"] }
+        }
+      }
+    },
+
+    "timeline_reconstructed": { "type": "boolean" },
+
+    "provenance": {
+      "type": "object",
+      "required": ["entered_at", "sources", "confidence"],
+      "properties": {
+        "entered_by": { "type": "string" },
+        "entered_at": { "type": "string", "format": "date" },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "enum": ["high", "medium", "low"] }
+      }
+    }
+  },
+
+  "definitions": {
+    "rate_or_null": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["numerator", "denominator", "rate"],
+          "properties": {
+            "numerator": { "type": "integer" },
+            "denominator": { "type": "integer" },
+            "rate": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      ]
+    }
+  }
+}
