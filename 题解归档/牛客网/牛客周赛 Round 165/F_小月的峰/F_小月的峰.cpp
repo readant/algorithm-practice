@@ -17,7 +17,7 @@
 // 上界：值域 [-1e9,1e9]，最大差 2e9，故 B ∈ [1, 2e9]；B=2e9 仍不可行 => -1。
 // 复杂度 O(n log(2e9))。
 
-#include <cstdio>      // scanf / printf
+#include <iostream>    // cin / cout
 #include <vector>      // vector
 #include <algorithm>   // max / min
 using namespace std;
@@ -55,9 +55,12 @@ bool feasible(ll B) {
 }
 
 int main() {
-    if (scanf("%d", &n) != 1) return 0;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    if (!(cin >> n)) return 0;
     L.resize(n); R.resize(n);
-    for (int i = 0; i < n; i++) scanf("%lld %lld", &L[i], &R[i]);
+    for (int i = 0; i < n; i++) cin >> L[i] >> R[i];
 
     ll lo = 1, hi = 2000000000LL, ans = -1;
     while (lo <= hi) {
@@ -65,6 +68,6 @@ int main() {
         if (feasible(mid)) { ans = mid; hi = mid - 1; }
         else lo = mid + 1;
     }
-    printf("%lld\n", ans);
+    cout << ans << '\n';
     return 0;
 }

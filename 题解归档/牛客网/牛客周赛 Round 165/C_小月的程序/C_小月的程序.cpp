@@ -16,19 +16,22 @@
 //
 // 复杂度 O(n)（sum n <= 2e5）。
 
-#include <cstdio>      // scanf / printf
+#include <iostream>    // cin / cout
 #include <vector>      // vector
 #include <algorithm>   // max / min
 using namespace std;
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
     int T;
-    if (scanf("%d", &T) != 1) return 0;
+    if (!(cin >> T)) return 0;
     while (T--) {
         int n;
-        scanf("%d", &n);
+        cin >> n;
         vector<long long> a(n);
-        for (int i = 0; i < n; i++) scanf("%lld", &a[i]);
+        for (int i = 0; i < n; i++) cin >> a[i];
 
         // L1：最长非增前缀长度（至少 1）
         int L1 = 1;
@@ -48,7 +51,7 @@ int main() {
             if (k < R0) continue;              // ② 后缀 a[k..] 必须非减
             if (a[0] <= a[k]) cnt++;           // ③ 交界
         }
-        printf("%lld\n", cnt);
+        cout << cnt << '\n';
     }
     return 0;
 }

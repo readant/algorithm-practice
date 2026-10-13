@@ -56,6 +56,18 @@ python .ai/build.py --open     # 顺便打开网页
 - **独立完成率** = 独立题数 ÷ **有 `independent` 标注的题数**（没标的题不参与）
 - **数据可信度**：强 = 平台判定 + 原始代码；中 = 自述 + 截图；弱 = 只有题号
 
+## 代码约定
+
+- **C++11**，编译统一 `-std=c++11`（`.vscode` 已配好）。
+- **输入输出统一 `cin` / `cout`**，不混用 `scanf` / `printf`。
+  **例外：比赛代码可单独指定规则**（赛时限紧需卡常数时可改用 `scanf` / `printf`），以该场约定为准。
+- **禁止万能头文件**，按实际用到的显式列标准头（`.md` 里的代码块同样适用）。
+- **不用 C++14/17 特性**：结构化绑定 `auto [a,b]`（含易漏的 `auto& [k,v]`）、泛型 lambda `[](auto& a, auto& b)`、
+  `make_unique`、`std::gcd` / `std::lcm`、`string_view` / `std::optional` / `if constexpr` / `std::clamp`。
+  替代：`.first/.second`、写具体类型的 lambda、`new`、手写 gcd。
+- 全仓体检可跑：`g++ -std=c++11 -fsyntax-only` 逐个编译 .cpp
+  （遍历含空格路径要用 `find -print0 | while IFS= read -r -d ''`）。
+
 ## 诚实规则（别绕过）
 
 1. **比赛 < 3 场，不做「趋势 / 进步 / 连续」这类表述**，只列事实。

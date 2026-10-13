@@ -134,9 +134,9 @@ getline(cin, s);             // 读整行（含空格）
 
 // C 字符串转 string
 char buf[100];
-scanf("%s", buf);
+cin >> buf;                  // 读入不含空白的字符串（本仓统一用 cin/cout）
 s = buf;
-printf("%s", s.c_str());
+cout << s;
 ```
 
 ### 3.2 常用操作

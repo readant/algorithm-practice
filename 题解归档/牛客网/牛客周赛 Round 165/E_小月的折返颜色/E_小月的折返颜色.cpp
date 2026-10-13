@@ -16,7 +16,7 @@
 //
 // 无多重边（原图是树，缩点后仍是树），故不会重复计数。
 
-#include <cstdio>          // scanf / printf
+#include <iostream>        // cin / cout
 #include <vector>          // vector
 #include <unordered_map>   // unordered_map
 #include <utility>         // pair / swap
@@ -36,15 +36,19 @@ struct DSU {
 };
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
     int n;
-    if (scanf("%d", &n) != 1) return 0;
+    if (!(cin >> n)) return 0;
     vector<long long> c(n + 1);
-    for (int i = 1; i <= n; i++) scanf("%lld", &c[i]);
+    for (int i = 1; i <= n; i++) cin >> c[i];
 
     DSU dsu(n);
     vector<pair<int, int>> edges(n > 0 ? n - 1 : 0);
     for (int k = 0; k + 1 < n; k++) {
-        int u, v; scanf("%d %d", &u, &v);
+        int u, v;
+        cin >> u >> v;
         edges[k] = {u, v};
         if (c[u] == c[v]) dsu.uni(u, v);
     }
@@ -79,6 +83,6 @@ int main() {
             ans += (S * S - SQ) / 2;
         }
     }
-    printf("%lld\n", ans);
+    cout << ans << '\n';
     return 0;
 }

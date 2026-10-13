@@ -18,7 +18,7 @@
 //
 // 本写法用 unordered_map 分组；若担心被卡哈希可改为排序+离散化。
 
-#include <cstdio>          // scanf / printf
+#include <iostream>        // cin / cout
 #include <vector>          // vector
 #include <unordered_map>   // unordered_map
 #include <algorithm>       // min
@@ -27,10 +27,13 @@
 using namespace std;
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
     int n;
-    if (scanf("%d", &n) != 1) return 0;
+    if (!(cin >> n)) return 0;
     vector<long long> a(n);
-    for (int i = 0; i < n; i++) scanf("%lld", &a[i]);
+    for (int i = 0; i < n; i++) cin >> a[i];
 
     // pref[i] = a[0]-a[1]+...±a[i-1]
     vector<long long> pref(n + 1, 0);
@@ -58,6 +61,6 @@ int main() {
         }
         best = min(best, llabs(reading));
     }
-    printf("%lld\n", best);
+    cout << best << '\n';
     return 0;
 }
