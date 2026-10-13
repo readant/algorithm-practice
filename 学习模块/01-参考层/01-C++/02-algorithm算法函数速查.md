@@ -57,11 +57,12 @@ double p = pow(2, 10);
 // 平方根
 double s = sqrt(16);
 
-// 最大公约数
-int g = gcd(12, 18);  // C++17
+// 最大公约数：C++11 要手写（std::gcd 是 C++17 才有，别在 OJ 上用）
+int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+int g = gcd(12, 18);
 
-// 最小公倍数
-int l = lcm(12, 18);  // C++17
+// 最小公倍数：同样手写；先除后乘，避免溢出
+int l = 12 / gcd(12, 18) * 18;
 ```
 
 ## 四、去重

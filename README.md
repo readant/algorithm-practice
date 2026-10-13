@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/C%2B%2B-C%2B%2B17-blue?style=flat-square&logo=c%2B%2B" alt="C++">
+  <img src="https://img.shields.io/badge/C%2B%2B11-blue?style=flat-square&logo=c%2B%2B" alt="C++11">
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT">
 </p>
 
@@ -14,7 +14,7 @@
   主路径是竞赛能力栈，不是无目的刷题：<br>
   按蓝桥杯块次推进，题解归档 + 三层知识库服务当前块；<br>
   满足开轨条件后再进入 ACM 门槛轨。<br>
-  <em>语言：C++</em>
+  <em>语言：C++11</em>
 </p>
 
 <br>
@@ -120,12 +120,13 @@ algorithm-practice/
 
 ## 语言与约定
 
-全部用 **C++**。
+全部用 **C++11**（编译统一 `-std=c++11`，与主流 OJ 对齐）。
 
-两条硬规则：
+三条硬规则：
 
 - **禁止万能头文件**——不使用 `#include <bits/stdc++.h>`，按实际用到的显式列出标准头文件
 - **题解必须验证**——`g++` 编译通过，且与暴力解在小数据上对拍一致，才归档
+- **不使用 C++14/17 的特性**——`std::gcd`、`std::lcm`、结构化绑定、`auto` 返回类型推导等都不可用
 
 ## 题解规范
 

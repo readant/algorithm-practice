@@ -150,7 +150,7 @@ int bfs(vector<vector<int>>& grid, int sx, int sy, int tx, int ty) {
         int size = q.size();
         
         for (int i = 0; i < size; i++) {
-            auto [x, y] = q.front();
+            int x = q.front().first, y = q.front().second;
             q.pop();
             
             if (x == tx && y == ty) return dist;

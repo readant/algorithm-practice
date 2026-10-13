@@ -136,7 +136,8 @@ int main() {
     m["Bob"] = 85;
     m["Charlie"] = 95;
     cout << "Map:" << endl;
-    for (auto& [key, value] : m) {
+    for (auto& _e : m) {
+        auto& key = _e.first; auto& value = _e.second;
         cout << "  " << key << ": " << value << endl;
     }
     
@@ -403,7 +404,8 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
     // 最小堆
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     
-    for (auto& [num, count] : freq) {
+    for (auto& _e : freq) {
+        auto& num = _e.first; auto& count = _e.second;
         pq.push({count, num});
         if (pq.size() > k) pq.pop();
     }

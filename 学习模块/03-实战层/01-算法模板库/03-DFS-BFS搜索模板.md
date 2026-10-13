@@ -30,7 +30,7 @@ void dfs(int startX, int startY) {
     vis[startX][startY] = true;
     
     while (!st.empty()) {
-        auto [x, y] = st.top(); st.pop();
+        int x = st.top().first, y = st.top().second; st.pop();
         for (int i = 0; i < 4; i++) {
             int nx = x + dx[i], ny = y + dy[i];
             if (边界检查通过 && !vis[nx][ny]) {
@@ -59,7 +59,7 @@ void bfs(int startX, int startY) {
     vis[startX][startY] = true;
     
     while (!q.empty()) {
-        auto [x, y] = q.front(); q.pop();
+        int x = q.front().first, y = q.front().second; q.pop();
         for (int i = 0; i < 4; i++) {
             int nx = x + dx[i], ny = y + dy[i];
             if (边界检查通过 && !vis[nx][ny]) {
@@ -81,7 +81,7 @@ void bfs(int startX, int startY) {
     vis[startX][startY] = true;
     
     while (!q.empty()) {
-        auto [x, y] = q.front(); q.pop();
+        int x = q.front().first, y = q.front().second; q.pop();
         for (int i = 0; i < 4; i++) {
             int nx = x + dx[i], ny = y + dy[i];
             if (边界检查通过 && !vis[nx][ny]) {

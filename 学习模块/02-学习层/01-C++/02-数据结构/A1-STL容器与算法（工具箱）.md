@@ -213,7 +213,7 @@ int t = st.top(); st.pop();
 ```cpp
 queue<pair<int, int>> q;
 q.push({0, 0});
-auto [x, y] = q.front(); q.pop();   // C++17
+int x = q.front().first, y = q.front().second; q.pop();   // C++11 写法
 ```
 
 **适用**：BFS、滑动窗口单调队列（扩展）、模拟排队。
@@ -302,10 +302,11 @@ cnt["apple"]++;              // 不存在则先插入默认 0 再 ++
 map<int, int> mp;
 mp[1] = 2;
 
-for (auto &[k, v] : mp)      // C++17
-    cout << k << ' ' << v << '\n';
+// C++11 写法：遍历时用 .first / .second（结构化绑定是 C++17 才有）
+for (auto &kv : mp)
+    cout << kv.first << ' ' << kv.second << '\n';
 
-// 旧式
+// 旧式迭代器（等价）
 for (auto it = mp.begin(); it != mp.end(); ++it)
     cout << it->first << ' ' << it->second << '\n';
 
@@ -362,7 +363,7 @@ bool cmp(Node x, Node y) {
 sort(arr, arr + n, cmp);
 
 // 或 lambda
-sort(v.begin(), v.end(), [](auto &x, auto &y) {
+sort(v.begin(), v.end(), [](const Node &x, const Node &y) {
     return x.a != y.a ? x.a < y.a : x.b > y.b;
 });
 ```
@@ -425,7 +426,7 @@ int n; string s;
 cin >> n;
 map<string, int> cnt;
 while (n--) { cin >> s; cnt[s]++; }
-for (auto &[k, v] : cnt) cout << k << ' ' << v << '\n';
+for (auto &kv : cnt) cout << kv.first << ' ' << kv.second << '\n';
 ```
 
 ### 12.2 TopK 小（大顶堆）
@@ -459,7 +460,7 @@ vis[sx][sy] = 1;                 // 入队立刻标记
 int dx[] = {0, 0, 1, -1};
 int dy[] = {1, -1, 0, 0};
 while (!q.empty()) {
-    auto [x, y] = q.front(); q.pop();
+    int x = q.front().first, y = q.front().second; q.pop();
     for (int d = 0; d < 4; d++) {
         int nx = x + dx[d], ny = y + dy[d];
         if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;

@@ -108,7 +108,8 @@ vector<pair<ll,int>> fx, fy; factor(x, fx); factor(y, fy);
 vector<pair<ll,int>> mg = merge(fx, fy);
 // 指数均分
 i128 a = 1, b = 1;
-for (auto& [p, e] : mg) {
+for (auto& _e : mg) {
+    auto& p = _e.first; auto& e = _e.second;
     a *= ipow(p, (e + 1) / 2);   // ⌈e/2⌉
     b *= ipow(p, e / 2);         // ⌊e/2⌋
 }
