@@ -5,9 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/C%2B%2B-primary-blue?style=flat-square&logo=c%2B%2B" alt="C++">
-  <img src="https://img.shields.io/badge/Python-secondary-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/C-对照-A8B9CC?style=flat-square" alt="C">
+  <img src="https://img.shields.io/badge/C%2B%2B-C%2B%2B17-blue?style=flat-square&logo=c%2B%2B" alt="C++">
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT">
 </p>
 
@@ -16,7 +14,7 @@
   主路径是竞赛能力栈，不是无目的刷题：<br>
   按蓝桥杯块次推进，题解归档 + 三层知识库服务当前块；<br>
   满足开轨条件后再进入 ACM 门槛轨。<br>
-  <em>语言：C++ 主 · Python 副 · C 仅对照 · Java 不在考虑</em>
+  <em>语言：C++</em>
 </p>
 
 <br>
@@ -122,12 +120,7 @@ algorithm-practice/
 
 ## 语言与约定
 
-| 语言 | 定位 |
-| :-- | :-- |
-| **C++** | 主语言。竞赛提交、讲义、模板默认用它 |
-| Python | 副语言。写脚本、对小数据、可选的解法对照 |
-| C | 按需对照，不单独成线 |
-| Java | 不在考虑 |
+全部用 **C++**。
 
 两条硬规则：
 
@@ -139,8 +132,7 @@ algorithm-practice/
 | 文件 | 说明 |
 | :-- | :-- |
 | `题解.md` | 题目描述 + 思路拆解 + 易错点 + 算法总结 |
-| `solution.cpp` | 主解法（C++） |
-| `solution.py` / `solution.c` | 可选的语言对照 |
+| `solution.cpp` | 主解法 |
 | `<解法名>.cpp` | 多解法，按解法特征命名，如 `暴力枚举.cpp`、`贪心法.cpp` |
 
 落点：洛谷题 → [`题解归档/洛谷/`](题解归档/洛谷/)；蓝桥真题 → [`题解归档/蓝桥杯/真题强化24/`](题解归档/蓝桥杯/真题强化24/README.md)
@@ -162,42 +154,35 @@ algorithm-practice/
 
 ## 精选题解
 
-> 每篇包含：题目描述 → 思路拆解 → **C++ 主解** →（可选 Python/C）→ 易错点 → 算法总结 → 知识点关联
+> 每篇包含：题目描述 → 思路拆解 → **C++ 主解** → 易错点 → 算法总结 → 知识点关联
 
 <table>
   <tr>
-    <th width="25%">题目</th>
-    <th width="20%">语言</th>
-    <th width="55%">亮点</th>
+    <th width="30%">题目</th>
+    <th width="70%">亮点</th>
   </tr>
   <tr>
     <td><a href="题解归档/洛谷/入门5-字符串/P5015_标准统计/题解.md">P5015 标题统计</a></td>
-    <td>C++ / Python</td>
     <td>getline vs cin 详解 + 三种 for 循环进阶写法</td>
   </tr>
   <tr>
     <td><a href="题解归档/洛谷/入门6-函数与结构体/P5735_距离函数/题解.md">P5735 距离函数</a></td>
-    <td>C++ / Python</td>
     <td>两点距离公式 + sqrt/pow/setprecision 逐行讲解</td>
   </tr>
   <tr>
     <td><a href="题解归档/洛谷/入门4-数组/P5731_蛇形方阵/题解.md">P5731 蛇形方阵</a></td>
-    <td>C++</td>
     <td>方向数组 + 螺旋模拟，含手动执行表</td>
   </tr>
   <tr>
     <td><a href="题解归档/洛谷/入门4-数组/P5732_杨辉三角/题解.md">P5732 杨辉三角</a></td>
-    <td>C++</td>
     <td>二维数组经典应用</td>
   </tr>
   <tr>
     <td><a href="题解归档/洛谷/入门5-字符串/P1914_小书童——凯撒密码/题解.md">P1914 凯撒密码</a></td>
-    <td>C++</td>
     <td>字符偏移 + 取模公式</td>
   </tr>
   <tr>
     <td><a href="题解归档/洛谷/入门5-字符串/P1957_口算练习题/题解.md">P1957 口算练习题</a></td>
-    <td>C++ / Python</td>
     <td>字符串解析</td>
   </tr>
 </table>
