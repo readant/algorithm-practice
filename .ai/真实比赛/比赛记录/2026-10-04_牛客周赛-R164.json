@@ -16,8 +16,10 @@
     "total_possible": 1400,
     "my_total": 185,
     "rank": 327,
-    "participants": 994,
-    "last_submission_time": "01:48:06"
+    "participants": 561,
+    "last_submission_time": "01:48:06",
+    "rating": 782,
+    "rating_delta": -30
   },
   "problems": [
     {
@@ -192,7 +194,11 @@
   "provenance": {
     "entered_by": "L君+AI",
     "entered_at": "2026-10-13",
-    "sources": ["赛后复盘 00-复盘.md（原始数据来自赛事排行榜）"],
-    "confidence": "high"
+    "sources": [
+      "赛后复盘 00-复盘.md（原始数据来自赛事排行榜）",
+      "个人主页「我的比赛」卡片，2026-11-08 经 Edge 扩展抓取：Rating 782（-30）、正式榜 327/561、AC 2/7"
+    ],
+    "confidence": "high",
+    "rank_note": "名次 327 两处一致。分母原记排行榜截图的 994，2026-11-08 改用个人主页「正式榜」561，以与 R165–R169 口径统一；994 为另一口径（疑含未计入正式榜的参赛者），原值留档于此，未采用。"
   }
 }

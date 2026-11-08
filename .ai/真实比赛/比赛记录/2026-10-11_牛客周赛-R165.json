@@ -16,8 +16,10 @@
     "total_possible": 1050,
     "my_total": 187.5,
     "rank": 576,
-    "participants": null,
-    "last_submission_time": "01:06:03"
+    "participants": 915,
+    "last_submission_time": "01:06:03",
+    "rating": 742,
+    "rating_delta": -40
   },
   "problems": [
     {
@@ -169,7 +171,10 @@
   "provenance": {
     "entered_by": "L君+AI",
     "entered_at": "2026-10-13",
-    "sources": ["赛后复盘 00-复盘.md（赛事排行榜截图 + 赛场题面/代码截图 6 张 + 官方比赛页逐题核对）"],
+    "sources": [
+      "赛后复盘 00-复盘.md（赛事排行榜截图 + 赛场题面/代码截图 6 张 + 官方比赛页逐题核对）",
+      "个人主页「我的比赛」卡片，2026-11-08 经 Edge 扩展抓取：Rating 742（-40）、正式榜 576/915（participants 由此回填）、AC 2/6"
+    ],
     "confidence": "high"
   }
 }

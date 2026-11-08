@@ -17,7 +17,9 @@
     "my_total": 236.25,
     "rank": 566,
     "participants": 1084,
-    "last_submission_time": "00:43:53"
+    "last_submission_time": "00:43:53",
+    "rating": 758,
+    "rating_delta": 16
   },
   "problems": [
     {
@@ -173,7 +175,8 @@
     "sources": [
       "赛事排行榜截图 1 张（名次/总分/逐题得分与用时）+ Rating 页 2 张（四场 Rating 卡片）",
       "赛内代码：A/B/C 三题截图 + D 题代码文本",
-      "官方题目列表 2026-10-19 抓取：pass_rates 用的是含赛后补题的官方终版（frozen 为 null，封榜未留档）"
+      "官方题目列表 2026-10-19 抓取：pass_rates 用的是含赛后补题的官方终版（frozen 为 null，封榜未留档）",
+      "个人主页「我的比赛」卡片，2026-11-08 经 Edge 扩展抓取：Rating 758（+16）、正式榜 566/1084、AC 2/6（原 Rating 截图仅 4 场，此处补齐数值）"
     ],
     "confidence": "high",
     "pass_rate_confidence": "medium（缺封榜数据，终版通过率含补题，不可用于赛内期望分）"
