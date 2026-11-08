@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0",
+  "contest": {
+    "id": "nc-weekly-167",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 167",
+    "date": "2026-10-25",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "IOI",
+    "contest_url": "https://ac.nowcoder.com/acm/contest/142115",
+    "is_first_participation": false
+  },
+  "scoring": {
+    "total_possible": 1100,
+    "my_total": 301.67,
+    "rank": 380,
+    "participants": 1095,
+    "last_submission_time": "01:50:35"
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": "小红的单复数",
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 1253, "denominator": 1269, "rate": 0.987 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 50,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 167/A_小红的单复数/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 7.98,
+      "time_start": "00:00:00",
+      "time_end": "00:07:58",
+      "tags": ["字符串", "模拟", "后缀判断"],
+      "notes": "去后缀 es/s 变单数；AC 50/50，全场最早提交之一（07:58）"
+    },
+    {
+      "letter": "B",
+      "title": "qcjj的演唱会",
+      "full_score": 100,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 929, "denominator": 1029, "rate": 0.903 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 100,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 167/B_qcjj的演唱会/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 55.55,
+      "time_start": "00:07:58",
+      "time_end": "01:03:32",
+      "tags": ["排序", "二分查找", "集合交集"],
+      "notes": "三场各排序，对第一场每首歌二分查二、三场；AC 100/100。时段 55′ 偏长（含对 C/D 的试探，见复盘）"
+    },
+    {
+      "letter": "C",
+      "title": "小红的区间",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 673, "denominator": 849, "rate": 0.793 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 125,
+      "status": "partial",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 167/C_小红的区间/我的提交(错解).cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 14.80,
+      "time_start": "01:03:32",
+      "time_end": "01:18:20",
+      "tags": ["数论", "构造", "区间和", "gcd"],
+      "notes": "提交页代码所有分支都写成 gcd(9,x)==1（复制粘贴错误），未真正构造区间；拿 125 应是少量样例命中"
+    },
+    {
+      "letter": "D",
+      "title": "小红的排列构造",
+      "full_score": 200,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 181, "denominator": 488, "rate": 0.371 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 26.67,
+      "status": "partial",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 167/D_小红的排列构造/我的提交(错解).cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 32.25,
+      "time_start": "01:18:20",
+      "time_end": "01:50:35",
+      "tags": ["构造", "奇偶性", "排列"],
+      "notes": "封榜最终 D=26.67；截图提交页显示 20.67（中间提交，代码已归档），最终提交代码未抓取。逻辑混乱，未按奇偶性构造"
+    },
+    {
+      "letter": "E",
+      "title": "小红的根（easy）",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 113, "denominator": 311, "rate": 0.363 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["树", "祖先关系", "枚举根"],
+      "notes": "榜面 0 分且无提交时间戳，按未提交处理；是否读过题面未确认"
+    },
+    {
+      "letter": "F",
+      "title": "小红的根（hard）",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 52, "denominator": 542, "rate": 0.096 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["树", "祖先关系", "差分/前缀和"],
+      "notes": "榜面 0 分且无提交时间戳，按未提交处理"
+    },
+    {
+      "letter": "G",
+      "title": "qcjj抢票",
+      "full_score": 300,
+      "pass_rates": {
+        "primary_source": "封榜",
+        "frozen": { "numerator": 14, "denominator": 161, "rate": 0.087 },
+        "official_final": null,
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["概率期望", "博弈", "取模逆元"],
+      "notes": "榜面 0 分且无提交时间戳，按未提交处理"
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": "00:07:58", "minutes": 7.98, "score_gained": 50, "kind": "题" },
+    { "stage": "B", "start": "00:07:58", "end": "01:03:32", "minutes": 55.55, "score_gained": 100, "kind": "题" },
+    { "stage": "C", "start": "01:03:32", "end": "01:18:20", "minutes": 14.80, "score_gained": 125, "kind": "题" },
+    { "stage": "D", "start": "01:18:20", "end": "01:50:35", "minutes": 32.25, "score_gained": 26.67, "kind": "题" },
+    { "stage": "尾段", "start": "01:50:35", "end": "02:00:00", "minutes": 9.42, "score_gained": 0, "kind": "空转" }
+  ],
+  "timeline_reconstructed": false,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "2026-10-26",
+    "sources": [
+      "封榜排行榜截图 1 张（名次/总分/逐题得分与用时；封榜时间 2026-10-25 21:00:00）",
+      "赛内代码：A/B/C/D 四题提交页截图，含提交时间 19:07:59 / 20:03:32 / 20:18:20 / 20:50:35 与赛内代码原文",
+      "真实题面：2026-10-26 经浏览器（WorkBuddy Browser + Edge）渲染抓取，题面全文见 题解归档/牛客网/牛客周赛 Round 167/00-题面.md",
+      "封榜通过率取自排行榜截图（A 1253/1269 等），非终版，可直接用于赛内期望分"
+    ],
+    "confidence": "high",
+    "pass_rate_confidence": "high（封榜数据，来自排行榜截图；与 R166 仅官方终版不同，本轮期望分判据可用）",
+    "rank_note": "赛事历史卡片显示「正式榜 380/1095」；封榜排行榜明细页我的行显示在 rank 474（可能为总榜口径）。本记录取卡片的正式榜 380/1095，与 R164–R166 口径一致；二者差 94 名，待你确认。"
+  }
+}

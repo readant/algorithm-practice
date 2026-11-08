@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0",
+  "contest": {
+    "id": "nc-weekly-169",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 169",
+    "date": "2026-11-08",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "IOI",
+    "contest_url": "https://ac.nowcoder.com/acm/contest/143199",
+    "is_first_participation": false
+  },
+  "scoring": {
+    "total_possible": 1050,
+    "my_total": 486.67,
+    "rank": 134,
+    "participants": 1187,
+    "last_submission_time": "01:59:30"
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": "小红的正方形",
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 1418, "denominator": 1437, "rate": 0.987 },
+        "official_insession": null
+      },
+      "my_score": 50,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 169/A_小红的正方形/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 8.25,
+      "time_start": "00:00:00",
+      "time_end": "00:08:15",
+      "tags": ["签到", "极差", "读入后取 max-min"],
+      "notes": "四个顶点、各边平行坐标轴，只需 x 的极差，y 读完即可丢弃。一次提交 AC（2ms / 290B）。8 分 15 秒里应当含通读全卷的时间，无法从提交记录区分，不计为失误"
+    },
+    {
+      "letter": "B",
+      "title": "小红的字符串压缩",
+      "full_score": 100,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 896, "denominator": 1088, "rate": 0.824 },
+        "official_insession": null
+      },
+      "my_score": 100,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 169/B_小红的字符串压缩/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 35.87,
+      "time_start": "00:08:15",
+      "time_end": "00:44:07",
+      "tags": ["模拟", "游程压缩", "字符计数", "输出格式"],
+      "notes": "第 1 次提交（19:38:03）格式错误，40 个测试点中 15 个 PE、24 个得 2.50 分共 60 分：并列最多的字符有多个时题面要求空格分隔，他连着输出。恰好只有单字符并列最多的数据点不受影响，故 24 点能过。第 2 次（19:44:07，+6分04秒）加 if(!first) cout << ' ' 后 AC。错解另存为 我的提交(格式错误).cpp"
+    },
+    {
+      "letter": "C",
+      "title": "小红的灯",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 738, "denominator": 930, "rate": 0.794 },
+        "official_insession": null
+      },
+      "my_score": 150,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 169/C_小红的灯/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 18.70,
+      "time_start": "00:44:07",
+      "time_end": "01:02:49",
+      "tags": ["模拟", "3-smooth", "倍数枚举", "约数奇偶"],
+      "notes": "一次提交 AC（4ms / 506B）。用 is_() 反复除 2、除 3 判 3-smooth，是则切换其所有倍数，最后数 true 的个数；Σ_{i:3-smooth} n/i 约 O(n log n)，n≤2e5 完全够。本场均分仅 77.99/150、通过率 79.4%——多数人没满分，他一次拿满"
+    },
+    {
+      "letter": "D",
+      "title": "小红跑步",
+      "full_score": 200,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 191, "denominator": 454, "rate": 0.421 },
+        "official_insession": null
+      },
+      "my_score": 186.67,
+      "status": "partial",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 169/D_小红跑步/我的提交(错解).cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 56.68,
+      "time_start": "01:02:49",
+      "time_end": "01:59:30",
+      "tags": ["网格遍历", "闭环", "方向判定", "有向面积"],
+      "notes": "16 个测试点错 #1、#3，其余全过，得 186.67/200。根因是方向数组固定优先级 {上下左右} 决定第一步走向，而「顺时针」是全局概念：同一份代码在不同环形状/起点下会走出顺或逆，导致答案为 dis 或 len-dis。2x3 矩形从左上角出发即反例。整段 56.68 分钟只有这 1 次提交，且提交时刻距结束 30 秒"
+    },
+    {
+      "letter": "E",
+      "title": "小红加边",
+      "full_score": 250,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 92, "denominator": 277, "rate": 0.332 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["树", "基环树", "树上距离", "树形DP", "模3计数"],
+      "notes": "0 条提交，按未提交处理；是否读过题面未确认。解法要点：加边 (u,v) 形成环长 = dist(u,v)+1，故代价为 dist≡2 (mod 3) 的点对数，需树形 DP 按距离模 3 合并子树。本场唯一正差失分（期望 83.0 / 实际 0）"
+    },
+    {
+      "letter": "F",
+      "title": "小红的排列构造",
+      "full_score": 300,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 17, "denominator": 144, "rate": 0.118 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["构造", "排列", "二分图匹配", "素数因子", "Special Judge"],
+      "notes": "0 条提交。构造 p 使 p_i≠a_i、p_i≠b_i 且至少 floor(n/2) 个位置 gcd>1，SPJ 判题，11.8% 通过率、仅 144 人提交，属明显超段位"
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": "00:08:15", "minutes": 8.25, "score_gained": 50, "kind": "题" },
+    { "stage": "B", "start": "00:08:15", "end": "00:44:07", "minutes": 35.87, "score_gained": 100, "kind": "题" },
+    { "stage": "C", "start": "00:44:07", "end": "01:02:49", "minutes": 18.70, "score_gained": 150, "kind": "题" },
+    { "stage": "D", "start": "01:02:49", "end": "01:59:30", "minutes": 56.68, "score_gained": 186.67, "kind": "题" },
+    { "stage": "尾段", "start": "01:59:30", "end": "02:00:00", "minutes": 0.50, "score_gained": 0, "kind": "空转" }
+  ],
+  "timeline_reconstructed": false,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "2026-11-08",
+    "sources": [
+      "题目列表页（题目 tab）2026-11-08 21:50 与 22:53 两次抓取，通过率/平均分数字完全一致，确认是赛内锁定值（赛后重现赛提交不计入）",
+      "提交记录页按用户名「读书蚁」筛选：5 条记录的 运行ID / 结果 / 得分 / 运行时间 / 内存 / 代码长度 / 提交时间（19:08:15 – 20:59:30）",
+      "A–D 赛内代码：牛客 view-submission 页面原文，转录后 g++ -std=c++11 -fsyntax-only 全部通过",
+      "D 题测试点详情页：16 个测试点，#1 与 #3 答案错误，其余得 6.67 分（百分制 93.33 → 折算 186.67/200）",
+      "名次 134 / 1187（正式榜）取自个人主页比赛卡片；两处排名页 URL 均 404，未能核对分数分布"
+    ],
+    "confidence": "high（提交记录、赛内代码、通过率均为原始抓取）",
+    "pass_rate_confidence": "high（赛内锁定值，两次抓取相隔 1 小时数字不变）",
+    "rank_note": "名次来自个人主页卡片，可靠但无法交叉验证；Rating 赛后显示「计算中」，未结算"
+  }
+}

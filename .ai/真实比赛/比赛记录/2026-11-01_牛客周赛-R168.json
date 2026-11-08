@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.0",
+  "contest": {
+    "id": "nc-weekly-168",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 168",
+    "date": "2026-11-01",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "IOI",
+    "contest_url": "https://ac.nowcoder.com/acm/contest/142559",
+    "is_first_participation": false
+  },
+  "scoring": {
+    "total_possible": 1400,
+    "my_total": 333.33,
+    "rank": 585,
+    "participants": 1284,
+    "last_submission_time": "01:31:48"
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": "小月的数组",
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 1560, "denominator": 1587, "rate": 0.983 },
+        "official_insession": null
+      },
+      "my_score": 50,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 168/A_小月的数组/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 9.02,
+      "time_start": "00:00:00",
+      "time_end": "00:09:01",
+      "tags": ["输入输出", "奇偶下标", "数组"],
+      "notes": "交错输入 2n 个数按奇偶下标分两行输出。第 4 次提交才 AC：前 3 次段错误（19:05:22 / 19:06:35 / 19:06:47），原因是数组开在 main 内的栈上且尺度过大；存活版本 long long a[10000001]（80MB 栈）仍属侥幸"
+    },
+    {
+      "letter": "B",
+      "title": "小月的屏幕",
+      "full_score": 100,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 1294, "denominator": 1406, "rate": 0.920 },
+        "official_insession": null
+      },
+      "my_score": 100,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 168/B_小月的屏幕/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 20.20,
+      "time_start": "00:09:01",
+      "time_end": "00:29:13",
+      "tags": ["模拟", "二维网格", "边界判定"],
+      "notes": "统计最外圈 '#' 数量。前 3 次提交均 答案错误 85/100（19:22:20 / 19:23:41 / 19:25:38），第 4 次 AC。AC 版代码 502B，三次错解 659–704B，是「删掉多余特判」后做对的"
+    },
+    {
+      "letter": "C",
+      "title": "小月的同余",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 975, "denominator": 1237, "rate": 0.788 },
+        "official_insession": null
+      },
+      "my_score": 150,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 168/C_小月的同余/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 26.27,
+      "time_start": "00:29:13",
+      "time_end": "00:55:29",
+      "tags": ["前缀和", "同余", "负数取模"],
+      "notes": "统计 pre[i] + pre[i-1] ≡ S (mod m) 的位置数。一次提交 AC（2ms）。题面后缀写的是 a_i+…+a_n（从 a_i 起、与前缀重叠），不是 a_{i+1}；他正好按重叠口径写的，是本场唯一一次读题零失误"
+    },
+    {
+      "letter": "D",
+      "title": "小月的储物格",
+      "full_score": 200,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 519, "denominator": 851, "rate": 0.610 },
+        "official_insession": null
+      },
+      "my_score": 33.33,
+      "status": "partial",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 168/D_小月的储物格/我的提交(TLE).cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 36.32,
+      "time_start": "00:55:29",
+      "time_end": "01:31:48",
+      "tags": ["环形数组", "并查集", "树状数组上二分", "复杂度估算"],
+      "notes": "环形 m 次「走 d_i 步再占用、遇到已占用继续右移」。思路与样例都对，但把 d_i 步真的走了一遍（d_i ≤ 1e9），3 次提交全是 运行超时（1001ms），得分 16.67→25→33.33"
+    },
+    {
+      "letter": "E",
+      "title": "小月的栈（Easy）",
+      "full_score": 250,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 163, "denominator": 358, "rate": 0.455 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["前缀和", "枚举", "分类讨论", "模拟"],
+      "notes": "提交记录里 0 条 E 的提交，按未提交处理；是否读过题面未确认（D 段 36 分钟 + 尾段 28 分钟均无 E 的提交）"
+    },
+    {
+      "letter": "F",
+      "title": "小月的川菜",
+      "full_score": 300,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 42, "denominator": 221, "rate": 0.190 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["计数", "排列", "乘法原理", "取模"],
+      "notes": "提交记录里 0 条 F 的提交。n ≤ 400、多组数据，方案数 mod 1e9+7，属计数类，明显超出当前段位"
+    },
+    {
+      "letter": "G",
+      "title": "小月的栈（Hard）",
+      "full_score": 350,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 57, "denominator": 265, "rate": 0.215 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["前缀和", "枚举", "贪心", "数据规模放大"],
+      "notes": "E 的加强版（仅 n,m,k 的量级不同），提交记录里 0 条提交"
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": "00:09:01", "minutes": 9.02, "score_gained": 50, "kind": "题" },
+    { "stage": "B", "start": "00:09:01", "end": "00:29:13", "minutes": 20.20, "score_gained": 100, "kind": "题" },
+    { "stage": "C", "start": "00:29:13", "end": "00:55:29", "minutes": 26.27, "score_gained": 150, "kind": "题" },
+    { "stage": "D", "start": "00:55:29", "end": "01:31:48", "minutes": 36.32, "score_gained": 33.33, "kind": "题" },
+    { "stage": "尾段", "start": "01:31:48", "end": "02:00:00", "minutes": 28.20, "score_gained": 0, "kind": "空转" }
+  ],
+  "timeline_reconstructed": false,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "2026-11-06",
+    "sources": [
+      "题目列表页截图（我的状态：A/B/C 通过，D–G 未通过）",
+      "题目列表 JSON 接口 /acm/contest/problem-list?id=142559：终版通过率 1560/1587 … 57/265、满分、全场平均分",
+      "提交记录页（onlyMyStatusFilter=true）2026-11-06 由浏览器渲染抓取：13 条提交的 运行ID / 结果 / 得分 / 运行时间 / 内存 / 代码长度 / 提交时间（19:05:22 – 20:31:48）",
+      "赛内代码截图 4 张（A/B/C/D 的编辑器原文），按原样转录到题解归档",
+      "D/E/F/G 题面 2026-11-06 由浏览器渲染抓取并逐题核对（E/F/G 题面只用于定性，未逐字归档）",
+      "名次 585/1284：取自个人主页（2026-11-08 由 R169 复盘时读取），非本场终榜截图"
+    ],
+    "confidence": "high（提交记录、代码、通过率均为原始抓取；名次为个人主页二手引用）",
+    "pass_rate_confidence": "high（赛后终版通过人数/提交人数，非封榜）",
+    "rank_note": "名次 585/1284 来自个人主页的跨场引用（R169 复盘时读取），非本场终榜截图；排行榜页本身仍未抓取成功。"
+  }
+}

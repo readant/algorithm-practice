@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "contest": {
+    "id": "nc-weekly-166",
+    "platform": "牛客",
+    "name": "牛客周赛 Round 166",
+    "date": "2026-10-18",
+    "start_time": "19:00:00",
+    "duration_minutes": 120,
+    "rated": true,
+    "contest_system": "IOI",
+    "contest_url": "https://ac.nowcoder.com/acm/contest/141877",
+    "is_first_participation": false
+  },
+  "scoring": {
+    "total_possible": 1050,
+    "my_total": 236.25,
+    "rank": 566,
+    "participants": 1084,
+    "last_submission_time": "00:43:53"
+  },
+  "problems": [
+    {
+      "letter": "A",
+      "title": "小月的增减",
+      "full_score": 50,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 1266, "denominator": 1289, "rate": 0.982 },
+        "official_insession": null
+      },
+      "my_score": 50,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 166/A_小月的增减/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 4.25,
+      "time_start": "00:00:00",
+      "time_end": "00:04:15",
+      "tags": ["模拟", "奇偶判断"],
+      "notes": "一次遍历，正确；比上场慢 1.75′"
+    },
+    {
+      "letter": "B",
+      "title": "小月的集市",
+      "full_score": 100,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 1125, "denominator": 1154, "rate": 0.975 },
+        "official_insession": null
+      },
+      "my_score": 100,
+      "status": "full",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 166/B_小月的集市/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 9.87,
+      "time_start": "00:04:15",
+      "time_end": "00:14:07",
+      "tags": ["整数运算", "整除", "抹零"],
+      "notes": "20.5′ → 9.87′，本场最明确的速度进步；pow 走 double 靠 1e-8 兜，属隐患"
+    },
+    {
+      "letter": "C",
+      "title": "小月的长廊",
+      "full_score": 150,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 474, "denominator": 831, "rate": 0.570 },
+        "official_insession": null
+      },
+      "my_score": 26.25,
+      "status": "partial",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 166/C_小月的长廊/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 5.58,
+      "time_start": "00:14:07",
+      "time_end": "00:19:42",
+      "tags": ["扫描线", "差分", "离散化"],
+      "notes": "把 d(x) 读成「区间长度」，判据写成 r-l+1>p；样例 1 恰好也得 4 未察觉；方法错，只过小数据"
+    },
+    {
+      "letter": "D",
+      "title": "小月的回声",
+      "full_score": 200,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 460, "denominator": 719, "rate": 0.640 },
+        "official_insession": null
+      },
+      "my_score": 60,
+      "status": "partial",
+      "code_file": "题解归档/牛客网/牛客周赛 Round 166/D_小月的回声/我的提交.cpp",
+      "submitted_in_contest": true,
+      "read_only": false,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": 24.18,
+      "time_start": "00:19:42",
+      "time_end": "00:43:53",
+      "tags": ["前缀和", "枚举上界", "剪枝"],
+      "notes": "O(n^3) 暴力（枚举 l/r 再扫中间），n≤2×10^5 必然超时，仅过最小档；复杂度未换算，与上场 C 同型"
+    },
+    {
+      "letter": "E",
+      "title": "小月的时差",
+      "full_score": 250,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 193, "denominator": 355, "rate": 0.544 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["BFS", "二分答案"],
+      "notes": "榜面 0 分且无提交时间戳，按未提交处理；是否读过题面未确认"
+    },
+    {
+      "letter": "F",
+      "title": "小月的订单",
+      "full_score": 300,
+      "pass_rates": {
+        "primary_source": "官方终版",
+        "frozen": null,
+        "official_final": { "numerator": 82, "denominator": 286, "rate": 0.287 },
+        "official_insession": null
+      },
+      "my_score": 0,
+      "status": "unattempted",
+      "code_file": null,
+      "submitted_in_contest": false,
+      "read_only": null,
+      "post_contest_score": null,
+      "post_contest_counts": false,
+      "time_spent_minutes": null,
+      "time_start": null,
+      "time_end": null,
+      "tags": ["DP", "二分答案"],
+      "notes": "榜面 0 分且无提交时间戳，按未提交处理；是否读过题面未确认"
+    }
+  ],
+  "timeline": [
+    { "stage": "A", "start": "00:00:00", "end": "00:04:15", "minutes": 4.25, "score_gained": 50, "kind": "题" },
+    { "stage": "B", "start": "00:04:15", "end": "00:14:07", "minutes": 9.87, "score_gained": 100, "kind": "题" },
+    { "stage": "C", "start": "00:14:07", "end": "00:19:42", "minutes": 5.58, "score_gained": 26.25, "kind": "题" },
+    { "stage": "D", "start": "00:19:42", "end": "00:43:53", "minutes": 24.18, "score_gained": 60, "kind": "题" },
+    { "stage": "尾段", "start": "00:43:53", "end": "02:00:00", "minutes": 76.12, "score_gained": 0, "kind": "空转" }
+  ],
+  "timeline_reconstructed": false,
+  "provenance": {
+    "entered_by": "L君+AI",
+    "entered_at": "2026-10-19",
+    "sources": [
+      "赛事排行榜截图 1 张（名次/总分/逐题得分与用时）+ Rating 页 2 张（四场 Rating 卡片）",
+      "赛内代码：A/B/C 三题截图 + D 题代码文本",
+      "官方题目列表 2026-10-19 抓取：pass_rates 用的是含赛后补题的官方终版（frozen 为 null，封榜未留档）"
+    ],
+    "confidence": "high",
+    "pass_rate_confidence": "medium（缺封榜数据，终版通过率含补题，不可用于赛内期望分）"
+  }
+}
