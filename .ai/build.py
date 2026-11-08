@@ -9,6 +9,10 @@
 只读 .ai/真实比赛/比赛记录/ 与 .ai/训练记录/日志/，
 写 .ai/输出/{brief.md,snapshot.json} 与 仓库根的「记录.html」（那个是给人看的，所以放外面）。
 
+所有图都在这一页里：汇总表的得分率条、尾段空转对比、每场的「时间去向」图。
+时间去向图由 timeline 现算成内联 SVG，不依赖前端库，断网也能打开——
+**不要为单场比赛另出一个 html**（2026-10-19 L君 明确要求）。
+
 诚实约束（别绕过）
 ------------------
 1. 场数 < 3 时**不做**「连续 / 趋势 / 进步」这类表述，只列事实。
@@ -116,6 +120,9 @@ def contest_facts(c):
         "lost_reachable": round(sum(max(0, p["expect"] - p["my"]) for p in probs if p["rate"] >= REACHABLE), 1),
         "problems": probs,
         "sources": c.get("provenance", {}).get("sources", []),
+        "pass_source": c["problems"][0]["pass_rates"]["primary_source"] if c["problems"] else None,
+        "timeline": c.get("timeline", []),
+        "timeline_reconstructed": bool(c.get("timeline_reconstructed")),
     }
 
 
@@ -180,7 +187,8 @@ def build_brief(cs, tr):
                  + ("未见违规" if not c["stop_loss_violations"] else f"违规题：{'/'.join(c['stop_loss_violations'])}"))
         if c["worst_zero"]:
             w = c["worst_zero"]
-            L.append(f"  - 期望分最高的零分题：{w['letter']}（期望 {w['expect']:g}）；"
+            src_note = "" if c["pass_source"] == "封榜" else f"（口径 {c['pass_source']}，非封榜口径，仅参考）"
+            L.append(f"  - 期望分最高的零分题：{w['letter']}（期望 {w['expect']:g}）{src_note}；"
                      f"本场期望分失分（可达）{c['lost_reachable']:g}")
     if cs and len(cs) < MIN_N:
         L.append("")
@@ -221,12 +229,57 @@ th{color:#6b7280;font-weight:500;background:#f6f7f9} td.n{font-variant-numeric:t
 .mut{color:#9ca3af} .bad{color:#dc2626} code{background:#eef1f4;padding:1px 5px;border-radius:3px;font-size:12px}
 .bar{display:flex;height:22px;border-radius:4px;overflow:hidden;border:1px solid #d8dee4;margin-top:4px}
 .bar i{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-style:normal}
+.mini{height:3px;background:#eef1f4;border-radius:2px;margin-top:5px;overflow:hidden;min-width:52px}
+.mini>i{display:block;height:100%;border-radius:2px}
+.cmp{max-width:560px;margin:10px 0 2px}
+.cmp .r{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:12px}
+.cmp .r b{width:64px;font-weight:400;color:#6b7280;font-variant-numeric:tabular-nums}
+.cmp .r .t{flex:1;height:14px;background:#f1efe8;border-radius:3px;overflow:hidden}
+.cmp .r .t>i{display:block;height:100%;background:#888780}
+.cmp .r em{width:48px;text-align:right;font-style:normal;color:#1f2328;font-variant-numeric:tabular-nums}
 footer{margin-top:36px;padding-top:12px;border-top:1px solid #e5e7eb;color:#6b7280;font-size:12px}
 """
 
 
 def esc(s):
     return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def svg_time(c):
+    """把一场的 timeline 画成横向条形（纯 SVG，无外部依赖，离线可用）。"""
+    tl = c.get("timeline") or []
+    if not tl:
+        return ""
+    mx = max(t["minutes"] for t in tl) or 1
+    x0, w = 160, 396
+    h = len(tl) * 40 + 48
+    o = [f'<svg viewBox="0 0 680 {h}" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">',
+         f'<title>{esc(c["name"])} 的时间去向</title>',
+         '<desc>逐题用时，以及与末次提交后的空转分钟数。</desc>',
+         '<g font-family="-apple-system, \'Segoe UI\', \'Microsoft YaHei\', sans-serif">',
+         f'<text x="{x0}" y="20" font-size="11" fill="#6b7280">分钟</text>']
+    notes = []
+    for i, t in enumerate(tl):
+        y = 30 + i * 40
+        m = t["minutes"]
+        bw = max(m / mx * w, 2)
+        col = ("#888780" if t.get("kind") == "空转"
+               else "#0F6E56" if t.get("score_gained") else "#BA7517")
+        o.append(f'<text x="152" y="{y + 11}" font-size="12.5" fill="#1f2328" '
+                 f'text-anchor="end" dominant-baseline="central">{esc(t["stage"])}</text>')
+        o.append(f'<rect x="{x0}" y="{y}" width="{bw:.1f}" height="22" rx="3" fill="{col}"/>')
+        o.append(f'<text x="{x0 + bw + 7:.1f}" y="{y + 11}" font-size="11.5" fill="#1f2328" '
+                 f'dominant-baseline="central">{m:g}</text>')
+    if c.get("timeline_reconstructed"):
+        notes.append("时间线为赛后重构，不是精确记录")
+    timed = sum(1 for t in tl if t.get("kind") == "题")
+    if timed < len(c.get("problems") or []):
+        notes.append("未提交的题未单独计时")
+    if notes:
+        o.append(f'<text x="{x0}" y="{h - 12}" font-size="11" fill="#9ca3af">'
+                 + "；".join(notes) + "</text>")
+    o.append("</g></svg>")
+    return "".join(o)
 
 
 def build_page(cs, tr):
@@ -248,26 +301,53 @@ def build_page(cs, tr):
                  "<th>名次</th><th>完全通过</th><th>部分分</th><th>尾段空转</th><th>止损违规</th></tr>")
         for c in cs:
             rk = f"{c['rank']}/{c['players']}" if c["players"] else (c["rank"] or "—")
+            rbar = (f'<div class=mini><i style="width:{min(c["rate"], 1) * 100:.1f}%;'
+                    'background:#0F6E56"></i></div>')
             P.append(f"<tr><td>{c['date']}</td><td>{esc(c['name'])}</td>"
-                     f"<td class=n>{c['my']:g}/{c['total']:g}</td><td class=n>{c['rate'] * 100:.1f}%</td>"
+                     f"<td class=n>{c['my']:g}/{c['total']:g}</td>"
+                     f"<td class=n>{c['rate'] * 100:.1f}%{rbar}</td>"
                      f"<td class=n>{rk}</td><td class=n>{c['full_count']}/{c['n_problems']}</td>"
                      f"<td class=n>{c['partial']}</td><td class=n>{c['idle']:g}′</td>"
                      f"<td>{'—' if not c['stop_loss_violations'] else '<span class=bad>' + '/'.join(c['stop_loss_violations']) + '</span>'}</td></tr>")
         P.append("</table>")
+        if len(cs) >= 2:
+            mx = max(c["idle"] for c in cs) or 1
+            P.append('<p class=sub style="margin:16px 0 2px">尾段空转（末次提交到结束）</p>')
+            P.append("<div class=cmp>")
+            for c in cs:
+                P.append(f'<div class=r><b>{c["date"][5:]}</b>'
+                         f'<div class=t><i style="width:{c["idle"] / mx * 100:.1f}%"></i></div>'
+                         f'<em>{c["idle"]:g}′</em></div>')
+            P.append("</div>")
+            P.append('<p class=sub style="margin:6px 0 0">只列各场数值；'
+                     '场数不足时不做“越来越差”这类趋势结论。</p>')
         if n < MIN_N:
             P.append(f'<div class=note>只有 {n} 场，不足以判断趋势或"进步"。本页只列事实。</div>')
         for c in cs:
             P.append(f"<h2>{esc(c['name'])} · 逐题</h2>")
+            if c.get("pass_source") and c["pass_source"] != "封榜":
+                P.append(f"<div class=note>通过率口径：{esc(c['pass_source'])}（非封榜口径）。"
+                         "带 * 的难度档按该通过率机械换算，会偏「简单」；"
+                         "期望分同样仅供参考，不能与封榜场次横向比较。</div>")
+            mark = "*" if (c.get("pass_source") and c["pass_source"] != "封榜") else ""
             P.append("<table><tr><th>题</th><th>满分</th><th>通过率</th><th>难度档</th>"
                      "<th>期望分</th><th>我的得分</th><th>用时</th><th>状态</th></tr>")
             for p in c["problems"]:
                 st = {"full": "✅", "partial": "⚠️ 部分分", "failed": "❌ 未过", "unattempted": "未做"}[p["status"]]
                 mins = f"{p['minutes']:g}′" if p["minutes"] else "—"
+                got = p["my"] / p["full"] if p["full"] else 0
+                gcol = "#0F6E56" if got >= 0.999 else ("#888780" if got <= 0 else "#BA7517")
+                gbar = (f'<div class=mini><i style="width:{got * 100:.0f}%;'
+                        f'background:{gcol}"></i></div>')
                 P.append(f"<tr><td>{p['letter']} · {esc(p['title'])}</td><td class=n>{p['full']:g}</td>"
-                         f"<td class=n>{p['rate'] * 100:.1f}%</td><td>{p['tier'] or '—'}</td>"
-                         f"<td class=n>{p['expect']:g}</td><td class=n>{p['my']:g}</td>"
+                         f"<td class=n>{p['rate'] * 100:.1f}%</td><td>{(p['tier'] or '—') + mark}</td>"
+                         f"<td class=n>{p['expect']:g}</td><td class=n>{p['my']:g}{gbar}</td>"
                          f"<td class=n>{mins}</td><td>{st}</td></tr>")
             P.append("</table>")
+            s = svg_time(c)
+            if s:
+                P.append('<p class=sub style="margin:16px 0 2px">时间去向</p>')
+                P.append(s)
 
     # 训练
     P.append("<h2>训练</h2>")
