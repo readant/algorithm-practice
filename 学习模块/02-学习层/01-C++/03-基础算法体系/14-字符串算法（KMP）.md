@@ -139,6 +139,6 @@ int cycleLen(const string& s) {
 
 ## 相关链接
 
-- [06-STL容器详解.md](../02-数据结构/06-STL容器详解.md) — string 的 find/substr 等基础操作
+- [A1-STL 工具箱](../02-数据结构/A1-STL容器与算法（工具箱）.md) — string 的 find/substr 等基础操作
 - [07-静态数组与字符串.md](../01-C++基础语法/07-静态数组与字符串.md) — 字符数组基础
 - [01-暴力枚举.md](01-暴力枚举.md) — 朴素匹配属于暴力枚举的一种
