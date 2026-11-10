@@ -15,11 +15,11 @@
   "scoring": {
     "total_possible": 1050,
     "my_total": 486.67,
+    "rating": 975,
+    "rating_delta": 132,
     "rank": 134,
     "participants": 1187,
-    "last_submission_time": "01:59:30",
-    "rating": null,
-    "rating_delta": null
+    "last_submission_time": "01:59:30"
   },
   "problems": [
     {

@@ -22,6 +22,7 @@
 
 import argparse
 import json
+import math
 import sys
 import webbrowser
 from datetime import datetime
@@ -33,12 +34,43 @@ CONTESTS = AI / "真实比赛" / "比赛记录"
 TRAINING = AI / "训练记录" / "日志"
 OUT = AI / "输出"
 PAGE = ROOT / "记录.html"                          # 给人看的，放外层
+ABILITY = ROOT / "能力概览.html"                   # 跨场能力画像，给人看的
 
 STOP_LOSS = 25             # 单题止损线（分钟）
 REACHABLE = 0.30           # 期望分失分只统计封榜通过率 >= 30% 的题
 MIN_N = 3                  # 少于此值就明确提示「数据不足以判断趋势」（本脚本本身不做趋势判断）
 TIERS = [("签到", 0.90), ("简单", 0.60), ("中档", 0.30), ("困难", 0.0)]
 INDEP = ("独立", "卡住后自己过", "看题解后过")
+PLAYER = "读书蚁"          # 能力概览页显示的名字，改这里即可
+
+# 六维：key / 名称 / 算法。顺序即雷达图从顶部顺时针的顺序。
+# 全部是「比率」，不给分、不加权；某一维没有数据就留空，绝不补 0。
+DIMS = [
+    ("rate",   "得分率",     "总分 ÷ 总满分"),
+    ("full",   "完全通过率",  "满分题数 ÷ 总题数"),
+    ("mid",    "中档题得分",  "通过率 30–60% 的题上：我的得分 ÷ 该题满分"),
+    ("ontime", "时间纪律",   "未超 25′ 止损线的题数 ÷ 有计时的题数"),
+    ("over",   "相对期望",   "我的总分 ÷ 全场期望分（100% = 正好达到全场平均）"),
+    ("indep",  "独立完成率",  "标了「是否独立」的题里独立做出 ÷ 标注总数"),
+]
+
+# 知识点归类：把题目里的人工 tag 归成算法大类。一道题可落到多个类（例如「模拟 + 前缀和」）。
+# 只收算法知识点；「复杂度估算 / 输出格式 / 数据规模放大 / Special Judge」属工程性失误，不进这张表。
+TOPICS = [
+    ("模拟与基础", {"签到", "模拟", "输入输出", "数组", "遍历", "分类讨论", "极差",
+                    "读入后取 max-min", "抹零", "整数运算", "奇偶下标", "奇偶判断", "奇偶性", "分组"}),
+    ("构造与贪心", {"构造", "贪心", "排列", "逆向", "枚举", "暴力", "枚举上界", "剪枝", "枚举根"}),
+    ("前缀和与差分", {"前缀和", "差分", "差分/前缀和", "区间和", "前缀交替和"}),
+    ("排序与二分", {"排序", "二分查找", "二分答案", "树状数组上二分", "单调性", "离散化", "扫描线"}),
+    ("字符串", {"字符串", "后缀判断", "游程压缩", "字符计数", "集合交集"}),
+    ("搜索与网格", {"BFS", "二维网格", "边界判定", "网格遍历", "闭环", "方向判定", "有向面积"}),
+    ("动态规划", {"DP", "树形DP", "换根", "概率期望"}),
+    ("数与计数", {"数论", "gcd", "整除", "同余", "负数取模", "取模", "取模逆元",
+                  "乘法原理", "计数", "3-smooth", "倍数枚举", "约数奇偶", "素数因子"}),
+    ("图与树", {"树", "并查集", "祖先关系", "树上计数", "基环树", "树上距离", "模3计数",
+                "环形数组", "二分图匹配"}),
+    ("博弈", {"博弈"}),
+]
 
 
 class Err(Exception):
@@ -99,7 +131,7 @@ def contest_facts(c):
             "full": p["full_score"], "rate": rate, "tier": _tier(_tier_rate(p)),
             "expect": round(rate * p["full_score"], 1), "my": p["my_score"],
             "status": p["status"], "minutes": p.get("time_spent_minutes"),
-            "note": p.get("notes"),
+            "note": p.get("notes"), "tags": p.get("tags") or [],
         })
     sc = c["scoring"]
     total, mine = sc.get("total_possible"), sc.get("my_total")
@@ -111,6 +143,7 @@ def contest_facts(c):
         "total": total, "my": mine,
         "rate": (mine / total) if (total and mine is not None) else None,
         "rank": sc.get("rank"), "players": sc.get("participants"),
+        "rating": sc.get("rating"), "rating_delta": sc.get("rating_delta"),
         "full_count": sum(1 for p in probs if p["status"] == "full"),
         "partial": sum(1 for p in probs if p["status"] == "partial"),
         "n_problems": len(probs),
@@ -289,7 +322,8 @@ def build_page(cs, tr):
          "<title>算法练习记录</title>", f"<style>{CSS}</style></head><body><div class=wrap>",
          "<h1>算法练习记录</h1>",
          f'<p class=sub>比赛 {n} 场' + (f" · 训练 {tr['days']} 天" if tr else "")
-         + " · 数据来自 <code>.ai/</code>（机器层）· 由 <code>.ai/build.py</code> 生成</p>"]
+         + ' · 数据来自 <code>.ai/</code>（机器层）· 由 <code>.ai/build.py</code> 生成'
+         + ' · <a href="能力概览.html">看能力概览 →</a></p>']
 
     if not cs and not tr:
         P.append('<div class=note>还没有任何记录。在根目录 <code>随手记/</code> 里写一行一题，让 AI 整理。</div>')
@@ -382,6 +416,390 @@ def build_page(cs, tr):
 
 
 # --------------------------------------------------------------------------- #
+# 能力概览页
+# --------------------------------------------------------------------------- #
+
+
+def _dim_one(c):
+    """单场的五个可算维度（indep 无数据，不在这里）。"""
+    probs = c["problems"]
+    exp = sum(p["expect"] for p in probs)
+    mid = [p for p in probs if 0.30 <= p["rate"] < 0.60]
+    mid_full = sum(p["full"] for p in mid)
+    timed = [p for p in probs if p["minutes"] is not None]
+    ok = [p for p in timed if p["minutes"] <= STOP_LOSS or p["status"] == "full"]
+    return {
+        "rate": c["rate"],
+        "full": c["full_count"] / c["n_problems"] if c["n_problems"] else None,
+        "mid": sum(p["my"] for p in mid) / mid_full if mid_full else None,
+        "ontime": len(ok) / len(timed) if timed else None,
+        "over": c["my"] / exp if exp else None,
+    }
+
+
+def ability_facts(cs):
+    """六维画像：全部用「总量比」，不用「各场比率的平均」，避免小场次权重虚高。"""
+    tot = sum(c["total"] or 0 for c in cs)
+    mine = sum(c["my"] or 0 for c in cs)
+    n_all = sum(c["n_problems"] for c in cs)
+    full_all = sum(c["full_count"] for c in cs)
+    exp_all = mid_my = mid_full = 0.0
+    on_ok = on_n = 0
+    for c in cs:
+        exp_all += sum(p["expect"] for p in c["problems"])
+        for p in c["problems"]:
+            if 0.30 <= p["rate"] < 0.60:
+                mid_my += p["my"]
+                mid_full += p["full"]
+            if p["minutes"] is not None:
+                on_n += 1
+                if p["minutes"] <= STOP_LOSS or p["status"] == "full":
+                    on_ok += 1
+    return {
+        "n": len(cs),
+        "dims": {
+            "rate": mine / tot if tot else None,
+            "full": full_all / n_all if n_all else None,
+            "mid": mid_my / mid_full if mid_full else None,
+            "ontime": on_ok / on_n if on_n else None,
+            "over": mine / exp_all if exp_all else None,
+            "indep": None,          # 训练层没有任何「是否独立」标注，不算，也不补 0
+        },
+        "series": [dict(name=c["name"], date=c["date"], my=c["my"], total=c["total"],
+                        full_count=c["full_count"], n_problems=c["n_problems"],
+                        rank=c["rank"], players=c["players"],
+                        rating=c.get("rating"), rating_delta=c.get("rating_delta"),
+                        **_dim_one(c)) for c in cs],
+    }
+
+
+def topic_facts(cs):
+    """按知识点大类聚合：这一类题的「我的得分 ÷ 该类满分」。一道题可计入多个类。"""
+    out = []
+    for name, keys in TOPICS:
+        my = full = n = 0
+        for c in cs:
+            for p in c["problems"]:
+                if keys & set(p.get("tags") or []):
+                    my += p["my"]
+                    full += p["full"]
+                    n += 1
+        if n:
+            out.append((name, {"n": n, "my": my, "full": full,
+                               "rate": my / full if full else None}))
+    return sorted(out, key=lambda kv: (-kv[1]["n"], kv[0]))
+
+
+def _pct(v, dash="—"):
+    return dash if v is None else f"{v * 100:.1f}%"
+
+
+def _rank_tier(pct):
+    """段位 = 最佳排名百分位机械换算，不含主观评价。"""
+    if pct is None:
+        return "—", "无可比数据"
+    x = pct * 100
+    for lo, t in ((5, "S"), (12, "A"), (25, "B"), (45, "C")):
+        if x <= lo:
+            return t, f"最佳前 {x:.1f}%"
+    return "D", f"最佳前 {x:.1f}%"
+
+
+def _radar_svg(dims):
+    cx, cy, R = 268, 196, 116
+    n = len(DIMS)
+
+    def pt(i, k):
+        a = -math.pi / 2 + i * 2 * math.pi / n
+        return cx + R * k * math.cos(a), cy + R * k * math.sin(a)
+
+    s = ['<svg viewBox="0 0 540 396" width="540" height="396" role="img" aria-label="六维能力图" '
+         'style="max-width:100%;height:auto;display:block;margin:4px auto 0">']
+    for k in (0.2, 0.4, 0.6, 0.8, 1.0):
+        pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in (pt(i, k) for i in range(n)))
+        s.append(f'<polygon points="{pts}" fill="none" stroke="#243040" stroke-width="1"/>')
+    for i, (key, name, _) in enumerate(DIMS):
+        x, y = pt(i, 1.0)
+        v = dims.get(key)
+        s.append(f'<line x1="{cx}" y1="{cy}" x2="{x:.1f}" y2="{y:.1f}" stroke="#243040"'
+                 + (' stroke-dasharray="3 5"/>' if v is None else "/>"))
+        lx, ly = pt(i, 1.30)
+        anchor = "middle" if abs(lx - cx) < 14 else ("start" if lx > cx else "end")
+        s.append(f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anchor}" font-size="13" '
+                 f'fill="{("#5c6a7d" if v is None else "#aab6c6")}">{name}</text>')
+        s.append(f'<text x="{lx:.1f}" y="{ly + 18:.1f}" text-anchor="{anchor}" font-size="15" '
+                 f'font-weight="700" fill="{("#5c6a7d" if v is None else "#4ade80")}">'
+                 f'{_pct(v, "未解锁")}</text>')
+    pts = " ".join(
+        f"{x:.1f},{y:.1f}"
+        for x, y in (pt(i, min(dims.get(k) or 0, 1.0)) for i, (k, _, _) in enumerate(DIMS)))
+    s.append(f'<polygon points="{pts}" fill="rgba(74,222,128,.13)"/>')
+    s.append(f'<polygon points="{pts}" fill="none" stroke="rgba(74,222,128,.28)" stroke-width="7"/>')
+    s.append(f'<polygon points="{pts}" fill="none" stroke="#4ade80" stroke-width="2"/>')
+    for i, (k, _, _) in enumerate(DIMS):
+        v = dims.get(k)
+        if v:
+            x, y = pt(i, min(v, 1.0))
+            s.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.2" fill="#0a0d13" stroke="#4ade80" '
+                     f'stroke-width="2"/>')
+    s.append(f'<circle cx="{cx}" cy="{cy}" r="2" fill="#4ade80"/>')
+    s.append("</svg>")
+    return "".join(s)
+
+
+def build_ability(cs):
+    ab = ability_facts(cs) if cs else {"n": 0, "dims": {}, "series": []}
+    d = ab["dims"]
+    known = [(k, n, v) for k, n, _ in DIMS if (v := d.get(k)) is not None]
+
+    CSS = (
+        "*{box-sizing:border-box}"
+        "html{background:#06090d}"
+        "body{margin:0;padding:24px 18px 56px;color:#dbe3ee;"
+        "font:13px/1.6 -apple-system,'Segoe UI','Microsoft YaHei',sans-serif;"
+        "-webkit-font-smoothing:antialiased;background-attachment:fixed;"
+        "background:radial-gradient(1100px 520px at 50% -8%,rgba(74,222,128,.10),transparent 62%),"
+        "radial-gradient(900px 440px at 100% 4%,rgba(56,189,248,.07),transparent 60%),#06090d}"
+        "body:before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;"
+        "background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),"
+        "linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);"
+        "background-size:46px 46px;"
+        "-webkit-mask-image:radial-gradient(ellipse 72% 50% at 50% 0%,#000 18%,transparent 78%);"
+        "mask-image:radial-gradient(ellipse 72% 50% at 50% 0%,#000 18%,transparent 78%)}"
+        ".wrap{max-width:1080px;margin:0 auto;position:relative;z-index:1}"
+        ".hero{display:flex;justify-content:space-between;align-items:center;gap:20px;"
+        "flex-wrap:wrap;padding:4px 2px 18px}"
+        ".en{font-size:10.5px;letter-spacing:.42em;color:#4ade80;font-weight:700}"
+        "h1{font-size:46px;line-height:1;margin:11px 0 9px;letter-spacing:.10em;font-weight:800;"
+        "background:linear-gradient(180deg,#ffffff,#8fa1b6);-webkit-background-clip:text;"
+        "background-clip:text;color:transparent}"
+        ".meta{font-size:11.5px;color:#6b7d92;letter-spacing:.04em}"
+        ".rank{display:flex;align-items:center;gap:13px}"
+        ".badge{width:64px;height:72px;display:grid;place-items:center;font-size:29px;"
+        "font-weight:800;color:#1c1206;"
+        "clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);"
+        "background:linear-gradient(165deg,#fde68a,#f59e0b 48%,#b45309)}"
+        ".rank .rl{font-size:9px;letter-spacing:.3em;color:#8b9aad}"
+        ".rank .rv{font-size:15px;font-weight:700;color:#fbbf24;"
+        "font-variant-numeric:tabular-nums;margin-top:3px}"
+        ".main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:12px;"
+        "margin-bottom:12px}"
+        "@media(max-width:820px){.main{grid-template-columns:1fr}.attrs{grid-template-columns:1fr}}"
+        ".panel{position:relative;background:linear-gradient(158deg,#101822,#0a0f16);"
+        "border:1px solid #1b2534;padding:16px 18px 18px;margin-bottom:12px}"
+        ".panel:before,.panel:after{content:'';position:absolute;width:20px;height:20px;"
+        "pointer-events:none}"
+        ".panel:before{left:-1px;top:-1px;border-left:2px solid #4ade80;border-top:2px solid #4ade80}"
+        ".panel:after{right:-1px;bottom:-1px;border-right:2px solid #4ade80;"
+        "border-bottom:2px solid #4ade80}"
+        ".ph{display:flex;align-items:center;gap:9px;margin:0 0 13px}"
+        ".ph:before{content:'';width:3px;height:12px;background:#4ade80;box-shadow:0 0 10px #4ade80}"
+        ".ph span{font-size:10.5px;letter-spacing:.24em;color:#6b7d92;font-weight:700}"
+        ".kpi{display:flex;flex-direction:column;justify-content:center;padding:4px 4px 0}"
+        ".kpi .kl{font-size:10px;letter-spacing:.26em;color:#6b7d92}"
+        ".kpi .kv{font-size:58px;line-height:1;font-weight:800;letter-spacing:-2.5px;"
+        "font-variant-numeric:tabular-nums;margin:6px 0 2px;"
+        "background:linear-gradient(180deg,#ffffff,#6ee7a7 72%,#22c55e);"
+        "-webkit-background-clip:text;background-clip:text;color:transparent}"
+        ".kpi .unit{font-size:10.5px;color:#5c6a7d;letter-spacing:.14em}"
+        ".grid4{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}"
+        ".tile{background:#0b1119;border:1px solid #17202c;padding:9px 11px}"
+        ".tile span{display:block;font-size:9.5px;letter-spacing:.16em;color:#6b7d92}"
+        ".tile b{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;color:#dbe3ee}"
+        ".tile b small{font-size:10px;color:#5c6a7d;font-weight:400}"
+        ".tile b.w{color:#fbbf24}"
+        ".attrs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 30px}"
+        "@media(max-width:880px){.attrs{grid-template-columns:1fr}}"
+        ".attr{display:grid;grid-template-columns:86px 1fr 52px;gap:9px;align-items:center}"
+        ".attr .k{font-size:12px;color:#a8b3c2}"
+        ".attr .v{text-align:right;font-size:13px;font-weight:700;"
+        "font-variant-numeric:tabular-nums;color:#4ade80}"
+        ".bar{height:9px;background:#0d151e;position:relative;"
+        "clip-path:polygon(0 0,100% 0,calc(100% - 5px) 100%,0 100%)}"
+        ".bar i{position:absolute;left:0;top:0;bottom:0;"
+        "background:linear-gradient(90deg,#15803d,#4ade80);"
+        "box-shadow:0 0 12px rgba(74,222,128,.55)}"
+        ".attr.off .k,.attr.off .v{color:#4a5769}"
+        ".attr.off .bar{background:none;border:1px dashed #26313f;clip-path:none}"
+        ".hint{margin-top:13px;font-size:11px;color:#6b7d92;line-height:1.75}"
+        ".hint b{color:#dbe3ee;font-weight:600}.hint .lo{color:#f87171}.hint .hi{color:#4ade80}"
+        ".topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px 26px}"
+        "@media(max-width:880px){.topics{grid-template-columns:1fr 1fr}}"
+        ".tp .trow{display:flex;justify-content:space-between;align-items:baseline;gap:8px}"
+        ".tp .tk{font-size:12px;color:#c3cddb}"
+        ".tp .tv{font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums}"
+        ".tbar{height:7px;background:#0d151e;margin:6px 0 5px;"
+        "clip-path:polygon(0 0,100% 0,calc(100% - 4px) 100%,0 100%)}"
+        ".tbar i{display:block;height:100%}"
+        ".tp .tmeta{font-size:9.5px;color:#5c6a7d;letter-spacing:.03em}"
+        ".tp.ok .tv{color:#4ade80}.tp.ok .tbar i{background:linear-gradient(90deg,#15803d,#4ade80)}"
+        ".tp.mid .tv{color:#fbbf24}"
+        ".tp.mid .tbar i{background:linear-gradient(90deg,#a16207,#fbbf24)}"
+        ".tp.bad .tv{color:#f87171}"
+        ".tp.bad .tbar i{background:linear-gradient(90deg,#991b1b,#f87171)}"
+        ".tp.low .tv{color:#6b7d92}.tp.low .tbar i{background:#28323f}"
+        "table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:2px}"
+        "th{font-size:9.5px;letter-spacing:.1em;color:#6b7d92;font-weight:600;text-align:left;"
+        "padding:7px 5px;border-bottom:1px solid #1b2534;white-space:nowrap}"
+        "td{padding:5px 5px;border-bottom:1px solid #131a24;white-space:nowrap}"
+        "tbody tr:hover{background:#0f1720}"
+        "th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}"
+        "td.bad{color:#f87171}"
+        "td.up{color:#4ade80}td.down{color:#f87171}"
+        "td small{font-size:9.5px;opacity:.72;margin-left:3px;font-weight:400}"
+        "td.dim,.dim{color:#6b7d92}"
+        "footer{margin-top:24px;padding-top:13px;border-top:1px solid #131a24;"
+        "color:#4a5769;font-size:11px;line-height:1.9}"
+        "footer a{color:#4ade80;text-decoration:none}"
+        "code{background:#131a24;padding:1px 5px;font-size:11px;color:#8fa1b6}"
+    )
+
+    P = ["<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8>",
+         "<meta name=viewport content='width=device-width,initial-scale=1'>",
+         "<title>能力概览</title><style>", CSS, "</style></head><body><div class=wrap>"]
+
+    if not ab["n"]:
+        P.append("<p>先记录一场比赛，这一页才有内容。</p></div></body></html>")
+        return "".join(P)
+
+    mine_all = sum(c["my"] for c in cs)
+    ac_all = sum(c["full_count"] for c in cs)
+    n_all = sum(c["n_problems"] for c in cs)
+    mid_items = [(c, p) for c in cs for p in c["problems"] if 0.30 <= p["rate"] < 0.60]
+    mid_zero = sum(1 for _, p in mid_items if p["my"] == 0)
+    viol = sum(1 for c in cs for p in c["problems"]
+               if p["minutes"] and p["minutes"] > STOP_LOSS and p["status"] != "full")
+    ranks = [(c["rank"], c["players"]) for c in cs if c["rank"]]
+    best_r, best_pp = min(ranks, key=lambda t: t[0])
+    pcts = [r / p for r, p in ranks if p]
+    best_pct = min(pcts) if pcts else None
+
+    lo = min(known, key=lambda t: t[2])
+    hi = max(known, key=lambda t: t[2])
+
+    tier, tier_txt = _rank_tier(best_pct)
+    # 当前积分 = 最近一场结算后的 Rating（不是得分之和）
+    rated = [c for c in cs if c.get("rating") is not None]
+    cur_rating = rated[-1]["rating"] if rated else None
+    cur_delta = rated[-1].get("rating_delta") if rated else None
+    delta_txt = (f"{cur_delta:+d}" if isinstance(cur_delta, int) else "—") if rated else ""
+    kpi_val = f"{cur_rating}" if cur_rating is not None else f"{mine_all:,.0f}"
+    kpi_unit = (f"牛客 RATING · 本场 {delta_txt}" if rated
+                else f"ACROSS {ab['n']} CONTESTS")
+    P.append(f"<div class=hero><div>"
+             f"<div class=en>ALGORITHM PRACTITIONER</div>"
+             f"<h1>{PLAYER}</h1>"
+             f"<div class=meta>牛客周赛 {ab['n']} 场 · {cs[0]['date']} → {cs[-1]['date']}"
+             f" · C++ 主语言</div></div>"
+             f"<div class=rank><div class=badge>{tier}</div>"
+             f"<div><div class=rl>RANK BY PERCENTILE</div>"
+             f"<div class=rv>{tier_txt}</div></div></div></div>")
+
+    P.append("<div class=main>")
+    P.append("<section class=panel><div class=ph><span>六维能力</span></div>")
+    P.append(_radar_svg(d))
+    P.append("</section>")
+
+    P.append("<section class=panel><div class=ph><span>总览</span></div>"
+             f"<div class=kpi><span class=kl>当前积分</span>"
+             f"<b class=kv>{kpi_val}</b>"
+             f"<span class=unit>{kpi_unit}</span></div>"
+             f"<div class=grid4>"
+             f"<div class=tile><span>完全通过</span><b>{ac_all}<small>/{n_all}</small></b></div>"
+             f"<div class=tile><span>中档题零分</span>"
+             f"<b>{mid_zero}<small>/{len(mid_items)}</small></b></div>"
+             f"<div class=tile><span>止损违规</span><b class=w>{viol}</b></div>"
+             f"<div class=tile><span>最佳名次</span><b>#{best_r}"
+             f"<small>/{best_pp}</small></b></div>"
+             f"</div></section></div>")
+
+    P.append("<section class=panel><div class=ph><span>属性</span></div><div class=attrs>")
+    for key, name, _ in DIMS:
+        v = d.get(key)
+        if v is None:
+            P.append(f"<div class='attr off'><span class=k>{name}</span>"
+                     "<span class=bar></span><span class=v>未解锁</span></div>")
+        else:
+            w = min(v, 1.0) * 100
+            P.append(f"<div class=attr><span class=k>{name}</span>"
+                     f"<span class=bar><i style='width:{w:.1f}%'></i></span>"
+                     f"<span class=v>{_pct(v)}</span></div>")
+    P.append("</div>")
+    P.append(f"<div class=hint>最短板 <b class=lo>{lo[1]} {_pct(lo[2])}</b> · "
+             f"最长板 <b class=hi>{hi[1]} {_pct(hi[2])}</b> &nbsp;|&nbsp; "
+             f"「独立完成率」未解锁：{n_all} 道训练题都没有「是否独立」标注，<b>不补 0</b></div>")
+    P.append("</section>")
+
+    P.append("<section class=panel><div class=ph><span>知识点掌握 · 按题目 tag 聚合</span></div>"
+             "<div class=topics>")
+    for tname, st in topic_facts(cs):
+        v = st["rate"]
+        heat = "low" if st["n"] < 2 else ("ok" if v >= 0.8 else ("mid" if v >= 0.4 else "bad"))
+        P.append(f"<div class='tp {heat}'><div class=trow><span class=tk>{tname}</span>"
+                 f"<span class=tv>{_pct(v)}</span></div>"
+                 f"<div class=tbar><i style='width:{(v or 0) * 100:.1f}%'></i></div>"
+                 f"<div class=tmeta>{st['n']} 题 · 得分 {st['my']:g}/{st['full']:g}</div></div>")
+    P.append("</div>")
+    P.append("<div class=hint><b class=hi>绿 ≥80%</b> · <b style='color:#fbbf24'>黄 40–80%</b> · "
+             "<b class=lo>&lt;40%</b> · 灰色 = 只有 1 道题，样本不足，不下结论。"
+             "一道题可计入多个知识点（如「模拟 + 前缀和」两边都算）。</div>")
+    P.append("</section>")
+
+    P.append("<section class=panel><div class=ph><span>逐场记录</span></div><table>"
+             "<thead><tr><th>日期</th><th>赛事</th><th class=n>得分</th><th class=n>得分率</th>"
+             "<th class=n>AC</th><th class=n>中档</th><th class=n>纪律</th>"
+             "<th class=n>积分</th><th class=n>名次</th></tr></thead><tbody>")
+    for s in ab["series"]:
+        rk = f"{s['rank']}/{s['players']}" if s.get("rank") and s.get("players") else (
+            str(s["rank"]) if s.get("rank") else "—")
+        rt, rd = s.get("rating"), s.get("rating_delta")
+        if rt is None:
+            rc = "<td class='n dim'>—</td>"
+        else:
+            cls = "n up" if (rd or 0) >= 0 else "n down"
+            dtx = f"{rd:+d}" if isinstance(rd, int) else ""
+            rc = f"<td class={cls}>{rt}<small>{dtx}</small></td>"
+        P.append(f"<tr><td class=dim>{s['date'][5:]}</td>"
+                 f"<td>{s['name'].replace('牛客周赛 Round ', 'R')}</td>"
+                 f"<td class=n>{s.get('my', 0):g}<span class=dim>/{s.get('total', 0):g}</span></td>"
+                 f"<td class=n>{_pct(s.get('rate'))}</td>"
+                 f"<td class=n>{s.get('full_count', 0)}/{s.get('n_problems', 0)}</td>"
+                 f"<td class=n>{_pct(s.get('mid'))}</td>"
+                 f"<td class=n>{_pct(s.get('ontime'))}</td>"
+                 f"{rc}"
+                 f"<td class='n dim'>{rk}</td></tr>")
+    P.append("</tbody></table></section>")
+
+    P.append("<section class=panel><div class=ph><span>中档题明细 · 通过率 30–60%</span></div><table>"
+             "<thead><tr><th>日期</th><th>题</th><th class=n>通过率</th><th class=n>满分</th>"
+             "<th class=n>我的分</th><th class=n>拿分率</th></tr></thead><tbody>")
+    t_my = t_full = 0
+    for c, p in mid_items:
+        t_my += p["my"]
+        t_full += p["full"]
+        cls = "n bad" if p["my"] == 0 else "n"
+        P.append(f"<tr><td class=dim>{c['date'][5:]}</td><td>{p['letter']} {p['title']}</td>"
+                 f"<td class=n>{p['rate'] * 100:.1f}%</td><td class=n>{p['full']:g}</td>"
+                 f"<td class={cls}>{p['my']:g}</td>"
+                 f"<td class=n>{p['my'] / p['full'] * 100:.1f}%</td></tr>")
+    if t_full:
+        P.append(f"<tr><td class=dim colspan=3>合计</td><td class=n>{t_full:g}</td>"
+                 f"<td class=n>{t_my:g}</td>"
+                 f"<td class=n>{t_my / t_full * 100:.1f}%</td></tr>")
+    P.append("</tbody></table></section>")
+
+    P.append(f"<footer>生成时间 {datetime.now():%Y-%m-%d %H:%M} · 止损线 {STOP_LOSS}′ · "
+             f"每个数字都能从 <code>.ai/真实比赛/比赛记录/*.json</code> 复算 · "
+             f"逐题档案见 <a href=\"记录.html\">记录.html</a><br>"
+             f"「当前积分」= 牛客 Rating，每场结算后的值（取自比赛主页），不是得分之和"
+             f"<br>这不是评分：六维全部是比率，分母在 <code>COMPETE.md §6.4 G 段</code>；"
+             f"没有数据的一维留空，不补 0<br>"
+             f"注：R163（2026-09-27，812 分，742/1056）未留逐题记录，不计入上面的统计，"
+             f"但它才是 Rating 曲线的起点</footer></div></body></html>")
+    return "".join(P)
+
+
+# --------------------------------------------------------------------------- #
 # 入口
 # --------------------------------------------------------------------------- #
 
@@ -405,9 +823,11 @@ def main():
                     "contests": cs, "training": tr}, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8")
     PAGE.write_text(build_page(cs, tr), encoding="utf-8")
+    ABILITY.write_text(build_ability(cs), encoding="utf-8")
 
     print(f"[完成] 比赛 {len(cs)} 场" + (f" · 训练 {tr['days']} 天" if tr else " · 训练层为空"))
-    print(f"       {OUT.relative_to(ROOT)}/brief.md · snapshot.json · {PAGE.relative_to(ROOT)}")
+    print(f"       {OUT.relative_to(ROOT)}/brief.md · snapshot.json · "
+          f"{PAGE.relative_to(ROOT)} · {ABILITY.relative_to(ROOT)}")
     if a.open:
         webbrowser.open(PAGE.as_uri())
     return 0
